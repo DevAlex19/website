@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const GalleryContainer = styled.div`
     position:relative;
-    width:100vw;
+    width:100%;
     height:1000px;
     overflow:hidden;
 `;
@@ -23,7 +23,7 @@ export const ItemContainer = styled.div<{dataNumber:number,slide:number}>`
     }
    
     &:nth-child(${({dataNumber}) => dataNumber}){
-        left:calc(100vw * ${({slide}) => slide});
+        left:calc(100% * ${({slide}) => slide});
     }
 `
 export const ItemBtn = styled(Link)`
