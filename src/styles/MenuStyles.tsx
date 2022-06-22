@@ -26,6 +26,8 @@ export const MenuLinksContainer = styled.div<{menu:boolean}>`
 export const Dropdown = styled.div<{open:boolean}>`
     display:${({open}) => open === true ? 'flex' : 'none'};
     padding:2rem;
+    z-index:1;
+    background:white;
     padding-top:0;
     justify-content:space-evenly;
     flex-wrap:wrap;

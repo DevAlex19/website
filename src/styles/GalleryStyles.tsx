@@ -8,12 +8,13 @@ export const GalleryContainer = styled.div`
     height:1000px;
     overflow:hidden;
 `;
-export const ItemContainer = styled.div<{dataNumber:number}>`
+export const ItemContainer = styled.div<{dataNumber:number,slide:number}>`
     position:absolute;
     width:100%;
     height:100%;
     top:0;
     left:0;
+    transition:left 0.5s;
     img{
         display:block;
         width:100%;
@@ -22,7 +23,7 @@ export const ItemContainer = styled.div<{dataNumber:number}>`
     }
    
     &:nth-child(${({dataNumber}) => dataNumber}){
-        left:calc(100vw * ${({dataNumber}) => dataNumber - 1});
+        left:calc(100vw * ${({slide}) => slide});
     }
 `
 export const ItemBtn = styled(Link)`
@@ -67,7 +68,7 @@ export const DotsContainer = styled.div`
     justify-content:center;
     margin-top:1.5rem;
 `;
-export const Dot = styled.div`
+export const Dot = styled.div<{active:number}>`
     width:15px;
     height:15px;
     border-radius:50%;
@@ -76,6 +77,9 @@ export const Dot = styled.div`
     transition:background 0.3s;
     &.ml{
         margin-left:0.4rem;
+    }
+    &:nth-child(${({active}) => active + 1}){
+        background:#e32636;
     }
     &:hover{
         background:#e32636;
