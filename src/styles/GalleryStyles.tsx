@@ -5,8 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const GalleryContainer = styled.div`
     position:relative;
     width:100%;
-    height:1000px;
+    height:900px;
     overflow:hidden;
+    @media (max-width:1600px){
+        height:700px;
+    }
+    @media (max-width:1000px){
+        height:500px;
+    }
 `;
 export const ItemContainer = styled.div<{dataNumber:number,slide:number}>`
     position:absolute;

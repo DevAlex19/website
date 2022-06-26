@@ -8,7 +8,6 @@ const images = ['https://wallpapercave.com/wp/wp2764244.jpg','https://wallpapera
 
 function Gallery(){
     let [activeSlide,setActiveSlide] = useState(0);
-        console.log(activeSlide)
     useEffect(()=>{
         const interval = setInterval(()=>{
             if(activeSlide === -3){

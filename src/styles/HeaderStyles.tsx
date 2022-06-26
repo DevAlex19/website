@@ -80,7 +80,7 @@ export const DropdownContact = styled.div`
     padding:0.7rem;
     box-shadow:1px 1px 5px rgba(0, 0, 0, 0.2);
     min-width:200px;
-    z-index:1;
+    z-index:2;
 `
 export const ContactContainer = styled.div`
     display:flex;
@@ -117,7 +117,7 @@ export const LoginDropdown = styled.div`
     box-shadow:1px 1px 5px rgba(0, 0, 0, 0.2);
     min-width:220px;
     font-size:1.2rem;
-    z-index:1;
+    z-index:2;
 `;
 export const LoginContainer = styled.div`
     padding:1rem;
@@ -142,7 +142,7 @@ export const CartDropdown = styled.div`
     padding:0.7rem;
     box-shadow:1px 1px 5px rgba(0, 0, 0, 0.2);
     font-size:1.2rem;
-    z-index:1;
+    z-index:2;
 `;
 
 export const CartContainer = styled.div`

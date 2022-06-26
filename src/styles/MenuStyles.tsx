@@ -10,6 +10,8 @@ export const MenuLinksContainer = styled.div<{menu:boolean}>`
     @media (max-width:860px){
         position:absolute;
         flex-direction:column;
+        z-index:1;
+        background:white;
         display:${({menu}) => menu === true ? 'flex' : 'none'};
         width:100%;
         animation:open 0.5s;
