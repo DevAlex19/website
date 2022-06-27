@@ -7,6 +7,13 @@ export const CategoriesContainer = styled.div`
     grid-template-columns:repeat(4,1fr);
     grid-template-rows:400px 500px 500px 400px;
     grid-gap:25px;
+    @media (max-width:1100px){
+        grid-template-rows:repeat(5,400px);
+    }
+    @media (max-width:550px){
+        display:flex;
+        flex-direction:column;
+    }
 `;
 export const CategoryItem = styled.div`
     cursor:pointer;
@@ -30,6 +37,21 @@ export const CategoryItem = styled.div`
     &:hover img{
         transform:scale(1.1);
     }
+    @media (max-width:1100px){
+        &:nth-child(6){
+            grid-area:4/1/5/3;
+        }
+        &:nth-child(7){
+            grid-area:4/3/5/5;
+        }
+        &:nth-child(8){
+            grid-area:5/1/6/3;
+        }
+        &:nth-child(9){
+            grid-area:5/3/6/5;
+        }
+    }
+
 `;
 export const Image = styled.img`
     width:100%;
@@ -51,5 +73,5 @@ export const CategoriesTitle = styled.div`
     font-size:2rem;
     text-transform:uppercase;
     text-align:center;
-    margin:7rem 0 3rem;
+    margin:9rem 0 4rem;
 `;

@@ -8,6 +8,7 @@ DropdownContact,PhoneContainer,DropdownIcon,MailContainer,Contact,
 About,LoginContainer,LoginDropdown,ConnectContainer,RegisterContainer,PasswordContainer,
 CartContainer,CartDropdown,EmptyCart,MenuContainer } from "../styles/HeaderStyles";
 import Menu from "./Menu";
+import { Link } from "react-router-dom";
 
  
 
@@ -19,7 +20,7 @@ function Header(){
     return <Container>
         <HeaderContainer>
             <LogoContainer className='logo'>
-                <span>4</span>sport
+                <Link to="/"><span>4</span>sport</Link>
                 <HamburgerMenu onClick={() => setMenu(!menu)}>
                     <div className={menu ? 'line1 active' : 'line1'}></div>
                     <div className={menu ? 'line2 active' : 'line2'}></div>
@@ -46,8 +47,8 @@ function Header(){
                             <DropdownIcon icon={faEnvelope}/>
                             <p>info@loremipsum.ro</p>
                         </MailContainer>
-                        <Contact>Contact</Contact>
-                        <About>Despre noi</About>
+                        <Contact><Link to='about'>Contact</Link></Contact>
+                        <About><Link to='about'>Despre noi</Link></About>
                     </DropdownContact>
                 </ContactContainer>
                 <LoginContainer>
@@ -55,15 +56,15 @@ function Header(){
                     <LoginDropdown>
                         <ConnectContainer>
                             <DropdownIcon icon={faArrowRightToBracket}/>
-                            <p>Conectare</p>
+                            <Link to='/login'>Conectare</Link>
                         </ConnectContainer>
                         <RegisterContainer>
                             <DropdownIcon icon={faRightToBracket}/>
-                            <p>Inregistreaza-te</p>
+                            <Link to='/login'>Inregistreaza-te</Link>
                         </RegisterContainer>
                         <PasswordContainer>
                             <DropdownIcon icon={faKey}/>
-                            <p>Ai uitat parola?</p>
+                            <Link to='/login'>Ai uitat parola?</Link>
                         </PasswordContainer>
                     </LoginDropdown>
                 </LoginContainer>

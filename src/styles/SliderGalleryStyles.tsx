@@ -5,7 +5,7 @@ export const SliderContainer = styled.div`
     width:70%;
     margin:0 auto;
     height:500px;
-    margin-top:6rem;
+    margin-top:9rem;
     position:relative;
     overflow:hidden;
     @media (max-width:1400px){
@@ -94,6 +94,6 @@ export const RatingNumber = styled.p`
 export const SliderTitle = styled.div`
     text-align:center;
     text-transform:uppercase;
-    margin-bottom:3rem;
+    margin-bottom:5rem;
     font-size:2rem;
 `;

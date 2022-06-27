@@ -25,6 +25,10 @@ export const LogoContainer = styled.div`
     span{
         color:#e32636;
     }
+    a{
+        text-decoration:none;
+        color:white;
+    }
     @media (max-width:860px){
         display:block;
         margin-bottom:1rem;
@@ -185,6 +189,10 @@ export const Contact = styled.p`
     display:flex;
     border-radius:5px;
     padding:0.5rem;
+    a{
+        text-decoration:none;
+        color:black;
+    }
     &:hover{
         background:rgb(220,220,220);
     }
@@ -193,6 +201,10 @@ export const About = styled.p`
     display:flex;
     border-radius:5px;
     padding:0.5rem;
+    a{
+        text-decoration:none;
+        color:black;
+    }
     &:hover{
         background:rgb(220,220,220);
     }
@@ -203,22 +215,26 @@ export const ConnectContainer = styled.div`
     display:flex;
     border-radius:5px;
     padding:0.5rem;
+    a{
+        text-decoration:none;
+        color:black;
+        margin-left:0.5rem;
+    }
     &:hover{
         background:rgb(220,220,220);
-    }
-    p{
-        margin-left:0.5rem;
     }
 `;
 export const RegisterContainer = styled.div`
     display:flex;
     border-radius:5px;
     padding:0.5rem;
+    a{
+        text-decoration:none;
+        color:black;
+        margin-left:0.5rem;
+    }
     &:hover{
         background:rgb(220,220,220);
-    }
-    p{
-        margin-left:0.5rem;
     }
 }`;
 export const PasswordContainer = styled.div`
@@ -227,12 +243,14 @@ export const PasswordContainer = styled.div`
     border-radius:5px;
     padding:0.5rem;
     margin-top:1.5rem;
-    &:hover{
-        background:rgb(220,220,220);
-    }
-    p{
+    a{
+        text-decoration:none;
+        color:black;
         margin-left:0.5rem;
         color:rgba(0,0,0,0.7);
+    }
+    &:hover{
+        background:rgb(220,220,220);
     }
     &:before{
         position:absolute;
