@@ -1,8 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { applyMiddleware, combineReducers, configureStore } from "@reduxjs/toolkit";
 import loginSlice from './loginSlice';
+import thunk from 'redux-thunk';
+import { useDispatch } from "react-redux";
 
-export default configureStore({
-    reducer:{
-       login:loginSlice
-    }
-});
+
+const store = configureStore({
+    reducer:loginSlice
+})
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch:() => AppDispatch = useDispatch;
+export default store;

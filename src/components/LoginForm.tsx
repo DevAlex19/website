@@ -1,6 +1,9 @@
 import React,{useState,useRef} from "react";
 import { useForm } from "react-hook-form";
 import { CreateAccountContainer, ForgotPasswordLink, FormBtn, Input, InputContainer,InputForm, InputLabel, InputWrapper, LoginContainer, UserLoginBtn, UserLoginContainer, UserLoginTitle } from "../styles/LoginStyles";
+import { useAppDispatch } from './store';
+
+
 
 interface Inputs{
     loginEmail?:string,
@@ -20,9 +23,10 @@ function LoginForm(){
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const inputs = watch();
- 
+    const dispatch = useAppDispatch();
 
-    function onSubmitLogin(data:Inputs){
+
+    async function onSubmitLogin(data:Inputs){
       const {loginEmail,loginPassword} = data;
       if(!loginEmail){
         setError('loginEmail',{type:'custom',message:'Email is required.'});
@@ -36,7 +40,9 @@ function LoginForm(){
       if(loginPassword && !passwordRegex.test(loginPassword)){
         setError('loginPassword',{type:'custom',message:'The password must be at least 8 characters and contain at least 1 uppercase character and 1 special character.'});
       }
-        
+      
+    
+    
     }
     function onSubmitRegister(data:Inputs){
         const {firstName,lastName,registerEmail,registerPassword} = data;
