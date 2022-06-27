@@ -56,9 +56,9 @@ export const InputContainer = styled.div<{openLogin?:boolean}>`
     width:500px;
     left:50%;
     transform:translateX(-50%);
-    transition:height 0.5s, padding 0.5s;;
+    transition:height 0.5s, padding 0.5s;
     padding-top:${({openLogin}) => openLogin === true ? '5rem' : '0'};
-    height:${({openLogin}) => openLogin === true ? '400px' : '0px'};
+    height:${({openLogin}) => openLogin === true ? '570px' : '0px'};
     .register{
         display:flex;
         justify-content:space-between;
@@ -104,24 +104,26 @@ export const InputLabel = styled.label`
 export const InputWrapper = styled.div`
     position:relative;  
     width:100%;
-    margin-bottom:3rem;
+    margin-bottom:2.4rem;
  
 `;
 export const UserLoginBtn = styled.button<{openLogin?:boolean}>`
-    background:${({openLogin}) => openLogin === true ? 'black' : 'none'};
-    transform:translateY(${({openLogin}) => openLogin === true ? '250px' : ''});
+    background:none;
+    transform:translateY(${({openLogin}) => openLogin === true ? '260px' : ''});
     cursor:pointer;
-    transition:transform 0.5s, background 0.3s,color 0.3s;
+    transition:transform 0.5s, background 0.3s,color 0.3s,opacity 0.2s;
     border:3px solid black;
     border-radius:3px;
     padding:1rem 0;
     width:500px;
     font-size:1.5rem;
     font-weight:500;
-    z-index:1000;
+    pointer-events:${({openLogin}) => openLogin === true ? 'none' : 'auto'};
+    z-index:0;
     position:relative;
     margin-top:3.5rem;
-    color:${({openLogin}) => openLogin === true ? 'white' : 'black'};
+    color:black;
+    opacity:${({openLogin}) => openLogin === true ? '0' : '1'};
     &.registerBtn{
         transform:translateY(${({openLogin}) => openLogin === true ? '340px' : ''});
         @media (max-width:580px){
@@ -132,8 +134,25 @@ export const UserLoginBtn = styled.button<{openLogin?:boolean}>`
         width:300px;
     }
 `;
+export const FormBtn = styled.button`
+    background:black;
+    cursor:pointer;
+    border:3px solid black;
+    border-radius:3px;
+    padding:1rem 0;
+    width:500px;
+    font-size:1.5rem;
+    font-weight:500;
+    z-index:1000;
+    position:relative;
+    margin-top:3.5rem;
+    color:white;
+    transition:background 0.3s,color 0.3s;
+`;
+
 export const ForgotPasswordLink = styled(Link)`
     transform:translateY(320px);
     color:black;
     font-size:1.3rem;
+    margin-top:2rem;
 `;

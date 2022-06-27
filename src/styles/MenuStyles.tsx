@@ -7,6 +7,7 @@ export const MenuLinksContainer = styled.div<{menu:boolean}>`
     display:flex;
     justify-content:center;
     position:relative;
+    z-index:1;
     @media (max-width:860px){
         position:absolute;
         flex-direction:column;
