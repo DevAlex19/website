@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const LoginContainer = styled.div`
     display:flex;
@@ -17,7 +18,7 @@ export const CreateAccountContainer = styled.div<{openLogin?:boolean}>`
     flex-direction:column;
     align-items:center;
     position:relative;
-    padding-top:15rem;
+    padding-top:11rem;
     background:rgb(234, 234, 234);
     transition:width 0.5s, height 0.5s;
     @media (max-width:1100px){
@@ -37,7 +38,7 @@ export const UserLoginContainer = styled.div<{openLogin?:boolean}>`
     flex-direction:column;
     align-items:center;
     position:relative;
-    padding-top:15rem;
+    padding-top:11rem;
     transition:width 0.5s,height 0.5s;
     @media (max-width:1100px){
         width:100%;
@@ -46,14 +47,14 @@ export const UserLoginContainer = styled.div<{openLogin?:boolean}>`
     }
 `;
 export const UserLoginTitle = styled.p`
-    font-size:1.8rem;
+    font-size:1.5rem;
     font-weight:600;
     text-transform:uppercase;
 `;
 export const InputContainer = styled.div<{openLogin?:boolean}>`
     position:absolute;
     overflow:hidden;
-    width:500px;
+    width:450px;
     left:50%;
     transform:translateX(-50%);
     transition:height 0.5s, padding 0.5s;
@@ -67,7 +68,7 @@ export const InputContainer = styled.div<{openLogin?:boolean}>`
         width:48%;
     }
     @media (max-width:580px){
-        width:100%;
+        width:300px;
         .register{
             flex-direction:column;
         }
@@ -105,7 +106,7 @@ export const InputWrapper = styled.div`
     position:relative;  
     width:100%;
     margin-bottom:2.4rem;
- 
+    
 `;
 export const UserLoginBtn = styled.button<{openLogin?:boolean}>`
     background:none;
@@ -115,7 +116,7 @@ export const UserLoginBtn = styled.button<{openLogin?:boolean}>`
     border:3px solid black;
     border-radius:3px;
     padding:1rem 0;
-    width:500px;
+    width:450px;
     font-size:1.5rem;
     font-weight:500;
     pointer-events:${({openLogin}) => openLogin === true ? 'none' : 'auto'};
@@ -140,7 +141,7 @@ export const FormBtn = styled.button`
     border:3px solid black;
     border-radius:3px;
     padding:1rem 0;
-    width:500px;
+    width:450px;
     font-size:1.5rem;
     font-weight:500;
     z-index:1000;
@@ -148,6 +149,11 @@ export const FormBtn = styled.button`
     margin-top:3.5rem;
     color:white;
     transition:background 0.3s,color 0.3s;
+    @media (max-width:580px){
+        width:300px;
+        left:50%;
+        transform:translate(-50%);
+    }
 `;
 
 export const ForgotPasswordLink = styled(Link)`
@@ -155,4 +161,21 @@ export const ForgotPasswordLink = styled(Link)`
     color:black;
     font-size:1.3rem;
     margin-top:2rem;
+`;
+
+
+export const PasswordIcon = styled(FontAwesomeIcon)`
+    position:absolute;
+    top:10px;
+    font-size:1.3rem;
+    right:0;
+    cursor:pointer;
+`;
+
+
+export const LoginMessage = styled.div`
+    position:absolute;
+    top:7%;
+    color:#e32636;
+    font-size:1.3rem;
 `;

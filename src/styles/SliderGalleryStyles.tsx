@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const SliderContainer = styled.div`
     width:70%;
     margin:0 auto;
-    height:500px;
+    height:540px;
     margin-top:9rem;
     position:relative;
     overflow:hidden;
     @media (max-width:1400px){
-        height:400px;
+        height:450px;
     }
 `;
 export const SliderItems = styled.div<{move?:number,width:number,active?:boolean,inactive?:boolean}>`
@@ -21,9 +21,10 @@ export const SliderItems = styled.div<{move?:number,width:number,active?:boolean
 `;
 
 export const SliderItem = styled.div`
-    flex-basis: 400px;
+    flex-basis: 300px;
     flex-grow: 0;
     flex-shrink: 0;
+    cursor:pointer;
     margin-left:30px;
     @media (max-width:1400px){
         flex-basis:300px;
@@ -52,7 +53,7 @@ export const Price = styled.p`
 
 export const Arrow = styled(FontAwesomeIcon)`
     position:absolute;
-    top:45%;
+    top:50%;
     color:black;
     cursor:pointer;
     font-size:3.5rem;
@@ -95,5 +96,5 @@ export const SliderTitle = styled.div`
     text-align:center;
     text-transform:uppercase;
     margin-bottom:5rem;
-    font-size:2rem;
+    font-size:1.8rem;
 `;

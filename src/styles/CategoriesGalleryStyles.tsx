@@ -64,13 +64,13 @@ export const CategoryTitle = styled.p`
     position:absolute;
     bottom:50px;
     left:40px;
-    font-size:1.8rem;
+    font-size:1.6rem;
     text-transform:uppercase;
     text-shadow:5px 5px 10px black;
 `;
 
 export const CategoriesTitle = styled.div`
-    font-size:2rem;
+    font-size:1.8rem;
     text-transform:uppercase;
     text-align:center;
     margin:9rem 0 4rem;

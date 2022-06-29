@@ -1,22 +1,25 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import { faMagnifyingGlass,faPhoneFlip,faUser,
 faCartShopping,faEnvelope,faArrowRightToBracket,
-faRightToBracket,faKey } from '@fortawesome/free-solid-svg-icons'
+faRightToBracket,faKey, faUserCheck, faBoxOpen,faUserGear, faGear, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { HeaderContainer,Container,LogoContainer,HamburgerMenu,
 BtnsContainer,InputContainer,Input,InputIcon,Icon,ContactContainer,
 DropdownContact,PhoneContainer,DropdownIcon,MailContainer,Contact,
 About,LoginContainer,LoginDropdown,ConnectContainer,RegisterContainer,PasswordContainer,
-CartContainer,CartDropdown,EmptyCart,MenuContainer } from "../styles/HeaderStyles";
+CartContainer,CartDropdown,EmptyCart,MenuContainer, UserDropdownContainer, Divide } from "../styles/HeaderStyles";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { initialStateType, logOut } from "./loginSlice";
+import { useAppDispatch } from "./store";
  
 
 
 function Header(){
     let [menu,setMenu] = useState(false);
+    const {state,registerEmail} = useSelector((state:initialStateType)=>state.userLogin);
+    const dispatch = useAppDispatch();
 
-   
     return <Container>
         <HeaderContainer>
             <LogoContainer className='logo'>
@@ -52,7 +55,32 @@ function Header(){
                     </DropdownContact>
                 </ContactContainer>
                 <LoginContainer>
-                    <Icon icon={faUser}/>
+                    <Icon icon={state ? faUserCheck : faUser}/>
+                    {state ? <LoginDropdown>
+                        <UserDropdownContainer>
+                            <DropdownIcon icon={faUser}/>
+                            <Link to='/dashboard'>{registerEmail}</Link>
+                        </UserDropdownContainer>
+                        <Divide/>
+                        <UserDropdownContainer>
+                            <DropdownIcon icon={faBoxOpen}/>
+                            <Link to='/dashboard'>Comenzile mele</Link>
+                        </UserDropdownContainer>
+                        <UserDropdownContainer>
+                            <DropdownIcon icon={faUserGear}/>
+                            <Link to='/dashboard'>Date utilizator</Link>
+                        </UserDropdownContainer>
+                        <UserDropdownContainer>
+                            <DropdownIcon icon={faGear}/>
+                            <Link to='/dashboard'>Schimba parola</Link>
+                        </UserDropdownContainer>
+                        <Divide/>
+                        <UserDropdownContainer>
+                            <DropdownIcon icon={faRightFromBracket}/>
+                            <p onClick={()=>dispatch(logOut())}>Deconectare</p>
+                        </UserDropdownContainer>
+                    </LoginDropdown> 
+                        : 
                     <LoginDropdown>
                         <ConnectContainer>
                             <DropdownIcon icon={faArrowRightToBracket}/>
@@ -66,7 +94,7 @@ function Header(){
                             <DropdownIcon icon={faKey}/>
                             <Link to='/login'>Ai uitat parola?</Link>
                         </PasswordContainer>
-                    </LoginDropdown>
+                    </LoginDropdown>}
                 </LoginContainer>
                 <CartContainer>
                     <Icon icon={faCartShopping}/>

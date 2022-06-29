@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div`
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:0.8rem 1.5rem;
+    padding:0.6rem 1.5rem;
     @media (max-width:860px){
        display:block;
     }
@@ -20,7 +20,7 @@ export const HeaderContainer = styled.div`
 export const LogoContainer = styled.div`
     color:white;
     position:relative;
-    font-size:2.5rem;
+    font-size:2.2rem;
     font-style:italic;
     span{
         color:#e32636;
@@ -71,7 +71,7 @@ export const InputIcon = styled(FontAwesomeIcon)`
 `;
 export const Icon = styled(FontAwesomeIcon)`
     cursor:pointer;
-    transform:scale(1.3);
+    transform:scale(1.2);
 `;
 export const DropdownContact = styled.div`
     position:absolute;
@@ -94,7 +94,7 @@ export const ContactContainer = styled.div`
     cursor:pointer;
     margin-left:3rem;
     align-items:center;
-    font-size:1.2rem;
+    font-size:1.1rem;
     p{
         margin-left:0.5rem;
     }
@@ -215,6 +215,7 @@ export const ConnectContainer = styled.div`
     display:flex;
     border-radius:5px;
     padding:0.5rem;
+    font-size:1.1rem;
     a{
         text-decoration:none;
         color:black;
@@ -224,10 +225,38 @@ export const ConnectContainer = styled.div`
         background:rgb(220,220,220);
     }
 `;
+export const UserDropdownContainer = styled.div`
+    display:flex;
+    border-radius:5px;
+    padding:0.5rem;
+    font-size:1.1rem;
+    position:relative;
+    a{
+        text-decoration:none;
+        color:black;
+        margin-left:0.5rem;
+    }
+    p{
+        margin-left:0.5rem;
+    }
+   svg{
+    width:20px;
+   }
+    &:hover{
+        background:rgb(220,220,220);
+    }
+`;
+export const Divide = styled.div`
+    width:100%;
+    background:rgb(220,220,220);;
+    height:1px;
+    margin:0.5rem 0;
+`;
 export const RegisterContainer = styled.div`
     display:flex;
     border-radius:5px;
     padding:0.5rem;
+    font-size:1.1rem;
     a{
         text-decoration:none;
         color:black;
@@ -240,6 +269,7 @@ export const RegisterContainer = styled.div`
 export const PasswordContainer = styled.div`
     display:flex;
     position:relative;
+    font-size:1.1rem;
     border-radius:5px;
     padding:0.5rem;
     margin-top:1.5rem;
@@ -270,8 +300,8 @@ export const HamburgerMenu = styled.div`
     right:0;
     top:6px;
     div{
-        width:38px;
-        height:4px;
+        width:35px;
+        height:3px;
         background:white;
         transform-origin:center;
     }
@@ -305,7 +335,7 @@ export const EmptyCart = styled.div`
      min-width:450px;
      padding:0.5rem;
      p:first-child{
-        font-size:1.5rem;
+        font-size:1.3rem;
         font-weight:500;
      }
      div{
@@ -324,4 +354,7 @@ export const EmptyCart = styled.div`
         width:50px;
         margin-right:1rem;
      }
+     @media (max-width:550px){
+        min-width:300px;
+    }
 `;

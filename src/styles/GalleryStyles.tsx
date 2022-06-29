@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export const GalleryContainer = styled.div`
     position:relative;
     width:100%;
-    height:900px;
+    height:700px;
     overflow:hidden;
     @media (max-width:1600px){
-        height:700px;
+        height:600px;
     }
     @media (max-width:1000px){
         height:500px;
@@ -36,10 +36,10 @@ export const ItemBtn = styled(Link)`
     position:absolute;
     color:white;
     padding:1.2rem 1.5rem;
-    bottom:100px;
+    bottom:85px;
     left:50%;
     transform:translate(-50%);
-    font-size:1.5rem;
+    font-size:1.2rem;
     text-transform:uppercase;
     text-decoration:none;
     background:black;
@@ -56,7 +56,7 @@ export const Arrow = styled(FontAwesomeIcon)`
     top:45%;
     color:white;
     cursor:pointer;
-    font-size:4rem;
+    font-size:3rem;
     transform:translateY(-50%);
     transition:color 0.3s;
     &.left{
@@ -75,8 +75,8 @@ export const DotsContainer = styled.div`
     margin-top:1.5rem;
 `;
 export const Dot = styled.div<{active:number}>`
-    width:15px;
-    height:15px;
+    width:12px;
+    height:12px;
     border-radius:50%;
     background:gray;
     cursor:pointer;

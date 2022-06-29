@@ -57,7 +57,7 @@ export const LinkContainer = styled.div`
 
 export const MainLink = styled(Link)`
     text-decoration:none;
-    font-size:1.1rem;
+    font-size:1rem;
     font-weight:500;
     color:black;
     display:flex;
@@ -69,7 +69,7 @@ export const MainLink = styled(Link)`
 `;
 export const LinkItem = styled(Link)`
     text-decoration:none;
-    font-size:1.1rem;
+    font-size:0.9rem;
     font-weight:500;
     margin-bottom:1rem;
     color:black;
@@ -87,7 +87,7 @@ export const LinkItem = styled(Link)`
 `;
 
 export const Links = styled.div`
-    margin-top:2rem;
+    margin-top:1.8rem;
 `;
 
 export const Expand = styled(FontAwesomeIcon)`
