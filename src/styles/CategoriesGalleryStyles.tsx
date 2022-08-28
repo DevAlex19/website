@@ -14,6 +14,7 @@ export const CategoriesContainer = styled.div`
         display:flex;
         flex-direction:column;
     }
+    margin-bottom:10rem;
 `;
 export const CategoryItem = styled.div`
     cursor:pointer;

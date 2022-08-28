@@ -3,8 +3,8 @@ import { CreateAccountContainer,UserLoginTitle,InputForm,InputContainer,InputWra
 Input,InputLabel,FormBtn,UserLoginBtn,PasswordIcon,LoginMessage } from "../styles/LoginStyles";
 import { Form } from "./LoginForm";
 import { useForm } from "react-hook-form";
-import { useAppDispatch } from "./store";
-import { addUser } from "./actions";
+import { useAppDispatch } from "../app/store/store";
+import { addUser } from "../app/data/actions";
 import { faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 

@@ -1,15 +1,15 @@
 import React from "react";
+import AboutComponent from "./AboutComponent";
 import Footer from "./Footer";
 import Header from "./Header";
-import UserDashboard from "./UserDashboard";
 
-
-function Dashboard(){
+function About (){
     return <>
         <Header/>
-        <UserDashboard/>
+        <AboutComponent/>
         <Footer/>
     </>
 }
 
-export default Dashboard;
+
+export default About;

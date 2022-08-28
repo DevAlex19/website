@@ -3,8 +3,8 @@ import { UserLoginContainer,UserLoginTitle,InputForm,InputContainer,InputWrapper
 UserLoginBtn,ForgotPasswordLink, PasswordIcon, LoginMessage } from "../styles/LoginStyles";
 import { useForm } from "react-hook-form";
 import { Form,Inputs } from "./LoginForm";
-import { loginUser } from "./actions";
-import { useAppDispatch } from "./store";
+import { loginUser } from "../app/data/actions";
+import { useAppDispatch } from "../app/store/store";
 import { useNavigate } from "react-router-dom";
 import { faEye,faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
@@ -20,10 +20,11 @@ function SignInForm({setFocus,focus,openLogin,setLogin}:Form){
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    
     function onSubmitLogin(data:Inputs){
         dispatch(loginUser(data)).then((res:any) =>{
             if(res.payload.state){
-                navigate('/dashboard');
+                navigate('/dashboard/orders');
                 localStorage.setItem('user',res.payload.registerEmail);
             }else{
                setErrorMessage('Email sau parola incorecte.')

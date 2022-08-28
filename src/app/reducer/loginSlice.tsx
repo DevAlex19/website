@@ -1,15 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {loginUser,getUser } from "./actions";
+import {loginUser,getUser, updateUser } from "../data/actions";
 
 type createUserType = {
     state:false;
 }
-type userLoginType = {
+export type userLoginType = {
     state:boolean;
     firstName?:string,
     lastName?:string,
     registerEmail?:string,
-    registerPassword?:string
+    registerPassword?:string,
+    town?:string,
+    city?:string,
+    phone?:string,
+    address?:string,
+    id?:string
 }
 
 export interface initialStateType{
@@ -26,7 +31,12 @@ const initialState:initialStateType = {
         firstName:'',
         lastName:'',
         registerEmail:'',
-        registerPassword:''
+        registerPassword:'',
+        town:'',
+        city:'',
+        phone:'',
+        address:'',
+        id:''
     }
 }
 
@@ -40,7 +50,12 @@ export const loginSlice = createSlice({
                 firstName:'',
                 lastName:'',
                 registerEmail:'',
-                registerPassword:''
+                registerPassword:'',
+                town:'',
+                city:'',
+                phone:'',
+                address:'',
+                id:''
             }
             localStorage.removeItem('user');
         }
@@ -55,9 +70,12 @@ export const loginSlice = createSlice({
         });
         builder.addCase(getUser.fulfilled,(state,action)=>{
             if(action.payload.state){
-                state.userLogin = action.payload;
+                state.userLogin = {...state.userLogin,...action.payload};
             }
         });
+        builder.addCase(updateUser.fulfilled,(state,action)=>{
+            state.userLogin = {...state.userLogin,...action.payload};
+        })
     }
 })
 

@@ -1,9 +1,9 @@
 import {useState,useEffect} from 'react';
 import AuthContext from './authContext';
-import { useAppDispatch } from './store';
-import { getUser } from './actions';
+import { useAppDispatch } from '../store/store';
+import { getUser } from '../data/actions';
 import { useSelector } from 'react-redux';
-import { initialStateType } from './loginSlice';
+import { initialStateType } from '../reducer/loginSlice';
 
 export const AuthProvider = ({children}:any) =>{
     const [user,setUser] = useState('');

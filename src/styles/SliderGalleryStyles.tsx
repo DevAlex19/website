@@ -12,24 +12,31 @@ export const SliderContainer = styled.div`
         height:450px;
     }
 `;
-export const SliderItems = styled.div<{move?:number,width:number,active?:boolean,inactive?:boolean}>`
+export const SliderItems = styled.div<{width?:number,transition?:boolean}>`
     display:flex;
+    width:100%;
     height:100%;
-    justify-content:${({width}) => width ===  1 ? 'flex-end' : 'flex-start'};
-    transform:translateX(${({width}) => width + 'px'});
-    transition:${({active,inactive}) => active === true && inactive === true ? 'none' : 'transform 0.5s'};
+    transform:translateX(calc(-27% * ${({width})=> width}));
+    transition:${({transition}) => transition === true ? 'transform 0.3s' : 'none'};
+    @media (max-width:1000px){
+        transform:translateX(calc(-35% * ${({width})=> width}));
+    }
+    @media (max-width:1000px){
+        transform:translateX(calc(-52% * ${({width})=> width}));
+    }
 `;
 
 export const SliderItem = styled.div`
-    flex-basis: 300px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    cursor:pointer;
-    margin-left:30px;
-    @media (max-width:1400px){
-        flex-basis:300px;
-        flex-grow: 0;
-        flex-shrink: 0;
+    min-width:25%;
+    cursor:pointer;    
+    &:not(:first-child){
+        margin-left:2%;
+    }
+    @media (max-width:1000px){
+        min-width:33.33%;
+    }
+    @media (max-width:1000px){
+        min-width:50%;
     }
 `;
 export const Image = styled.img`

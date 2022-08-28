@@ -10,8 +10,8 @@ CartContainer,CartDropdown,EmptyCart,MenuContainer, UserDropdownContainer, Divid
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { initialStateType, logOut } from "./loginSlice";
-import { useAppDispatch } from "./store";
+import { initialStateType, logOut } from "../app/reducer/loginSlice";
+import { useAppDispatch } from "../app/store/store";
  
 
 
@@ -50,8 +50,8 @@ function Header(){
                             <DropdownIcon icon={faEnvelope}/>
                             <p>info@loremipsum.ro</p>
                         </MailContainer>
-                        <Contact><Link to='about'>Contact</Link></Contact>
-                        <About><Link to='about'>Despre noi</Link></About>
+                        <Contact><Link to='/about'>Contact</Link></Contact>
+                        <About><Link to='/about'>Despre noi</Link></About>
                     </DropdownContact>
                 </ContactContainer>
                 <LoginContainer>

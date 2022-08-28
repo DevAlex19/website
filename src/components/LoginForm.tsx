@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {LoginContainer } from "../styles/LoginStyles";
 import SignInForm from './SignInForm';
 import RegisterForm from './RegisterForm';
-import { useAuthContext } from "./useAuthContext";
+import { useAuthContext } from "../app/authProvider/useAuthContext";
 
 export interface Inputs{
     loginEmail?:string,

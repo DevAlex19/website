@@ -33,7 +33,7 @@ function Footer(){
                 <FooterLink to="">Portari</FooterLink>
             </MenuContainer>
             <MenuContainer>
-                <FooterLink to="">Despre noi</FooterLink>
+                <FooterLink to="/about">Despre noi</FooterLink>
                 <FooterLink to="">+1234 123 123</FooterLink>
                 <FooterLink to="">info@loremipsum.ro</FooterLink>
             </MenuContainer>

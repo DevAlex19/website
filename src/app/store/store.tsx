@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginSlice from './loginSlice';
+import loginSlice from '../reducer/loginSlice';
 import { useDispatch } from "react-redux";
 
 
