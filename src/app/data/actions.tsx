@@ -39,6 +39,7 @@ export const loginUser = createAsyncThunk(
   "login/loginUser",
   async (data: any) => {
     const { loginEmail, loginPassword } = data;
+
     try {
       const res = await signInWithEmailAndPassword(
         auth,
@@ -48,12 +49,20 @@ export const loginUser = createAsyncThunk(
       const user = res.user;
       const q = query(users, where("registerEmail", "==", user.email));
       const docs = await getDocs(q);
-      if (docs.docs.length > 0) {
-        const { firstName, lastName, registerEmail, registerPassword } =
-          docs.docs[0].data();
 
+      if (docs.docs.length > 0) {
+        const { firstName, lastName, registerEmail } = docs.docs[0].data();
+        const updateUser = doc(db, "users", docs.docs[0].id);
+
+        await updateDoc(updateUser, { registerPassword: loginPassword });
         localStorage.setItem("Auth Token", docs.docs[0].id);
-        return { firstName, lastName, registerEmail, registerPassword };
+
+        return {
+          firstName,
+          lastName,
+          registerEmail,
+          registerPassword: loginPassword,
+        };
       }
     } catch (e) {}
 
@@ -82,6 +91,7 @@ export const updateUser = createAsyncThunk(
       data;
 
     const user = doc(db, "users", id);
+
     if (newPassword) {
       try {
         const currentUser = auth.currentUser;
