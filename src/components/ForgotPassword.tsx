@@ -1,20 +1,20 @@
-import React from "react";
-import Footer from "./Footer";
-import Header from "./Header";
-import LoginForm from "./LoginForm";
 import { Navigate } from "react-router-dom";
+import Footer from "./Footer";
+import ForgotPasswordForm from "./ForgotPasswordForm";
+import Header from "./Header";
 
-function Login() {
+function ForgotPassword() {
   if (localStorage.getItem("Auth Token")) {
     return <Navigate to="/" />;
   }
+
   return (
     <>
       <Header />
-      <LoginForm />
+      <ForgotPasswordForm />
       <Footer />
     </>
   );
 }
 
-export default Login;
+export default ForgotPassword;
