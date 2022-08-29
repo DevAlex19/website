@@ -35,6 +35,7 @@ const initialState: initialStateType = {
       id: "",
     },
   },
+ 
 };
 
 export const loginSlice = createSlice({
@@ -56,6 +57,7 @@ export const loginSlice = createSlice({
 
       localStorage.removeItem("Auth Token");
     },
+   
   },
   extraReducers: (builder) => {
     builder.addCase(addUser.pending, (state, action) => {

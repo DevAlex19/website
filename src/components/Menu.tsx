@@ -48,7 +48,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
   return (
     <MenuLinksContainer menu={menu}>
       <LinkContainer>
-        <MainLink onClick={() => expandMenu(0)} to="/soj">
+        <MainLink onClick={() => expandMenu(0)} to={generateRoute(['ghete de fotbal'])}>
           Ghete de fotbal
           {expand[0] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
         </MainLink>
@@ -58,7 +58,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
             {MenuLinks["ghete de fotbal"]["modele de ghete"].map(
               (item: any) => {
                 return (
-                  <LinkItem key={item} to={generateRoute(item)}>
+                  <LinkItem key={item} to={item === 'modele de ghete' ? generateRoute(['ghete de fotbal','modele de ghete']) : generateRoute(['ghete de fotbal','modele de ghete',item])}>
                     {item}
                   </LinkItem>
                 );
@@ -68,7 +68,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["ghete de fotbal"]["categorie"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'categorie' ? generateRoute(['ghete de fotbal','categorie']) : generateRoute(['ghete de fotbal','categorie',item])}>
                   {item}
                 </LinkItem>
               );
@@ -77,7 +77,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["ghete de fotbal"]["personalizate"].map((item) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'personalizate' ? generateRoute(['ghete de fotbal','personalizate']) : generateRoute(['ghete de fotbal','personalizate',item])}>
                   {item}
                 </LinkItem>
               );
@@ -86,7 +86,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["ghete de fotbal"]["marca"].map((item) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'marca' ? generateRoute(['ghete de fotbal','marca']) : generateRoute(['ghete de fotbal','marca',item])}>
                   {item}
                 </LinkItem>
               );
@@ -95,7 +95,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer>
-        <MainLink onClick={() => expandMenu(1)} to="/soj">
+        <MainLink onClick={() => expandMenu(1)} to={generateRoute(['pentru fani'])}>
           Pentru fani
           {expand[1] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
         </MainLink>
@@ -103,7 +103,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["pentru fani"]["cluburi"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'cluburi' ? generateRoute(['pentru fani','cluburi']) : generateRoute(['pentru fani','cluburi',item])}>
                   {item}
                 </LinkItem>
               );
@@ -112,7 +112,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["pentru fani"]["tricouri"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'tricouri' ? generateRoute(['pentru fani','tricouri']) : generateRoute(['pentru fani','tricouri',item])}>
                   {item}
                 </LinkItem>
               );
@@ -121,7 +121,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["pentru fani"]["hanorace"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'hanorace' ? generateRoute(['pentru fani','hanorace']) : generateRoute(['pentru fani','hanorace',item])}>
                   {item}
                 </LinkItem>
               );
@@ -130,7 +130,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["pentru fani"]["mingi"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'mingi' ? generateRoute(['pentru fani','mingi']) : generateRoute(['pentru fani','mingi',item])}>
                   {item}
                 </LinkItem>
               );
@@ -139,7 +139,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer>
-        <MainLink onClick={() => expandMenu(2)} to="/soj">
+        <MainLink onClick={() => expandMenu(2)} to={generateRoute(['imbracaminte'])}>
           Imbracaminte
           {expand[2] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
         </MainLink>
@@ -147,7 +147,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["tricouri de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'tricouri de fotbal' ? generateRoute(['imbracaminte','tricouri de fotbal']) : generateRoute(['imbracaminte','tricouri de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -156,7 +156,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["jambiere de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'jambiere de fotbal' ? generateRoute(['imbracaminte','jambiere de fotbal']) : generateRoute(['imbracaminte','jambiere de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -165,7 +165,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["sorturi de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'sorturi de fotbal' ? generateRoute(['imbracaminte','sorturi de fotbal']) : generateRoute(['imbracaminte','sorturi de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -174,7 +174,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["sosete de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'sosete de fotbal' ? generateRoute(['imbracaminte','sosete de fotbal']) : generateRoute(['imbracaminte','sosete de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -183,7 +183,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["hanorace de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'hanorace de fotbal' ? generateRoute(['imbracaminte','hanorace de fotbal']) : generateRoute(['imbracaminte','hanorace de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -192,7 +192,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["pantaloni de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'pantaloni de fotbal' ? generateRoute(['imbracaminte','pantaloni de fotbal']) : generateRoute(['imbracaminte','pantaloni de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -201,7 +201,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks.imbracaminte["treninguri de fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'treninguri de fotbal' ? generateRoute(['imbracaminte','treninguri de fotbal']) : generateRoute(['imbracaminte','treninguri de fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -210,7 +210,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer>
-        <MainLink onClick={() => expandMenu(3)} to="/soj">
+        <MainLink onClick={() => expandMenu(3)} to={generateRoute(['mingi de fotbal'])}>
           Mingi de fotbal
           {expand[3] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
         </MainLink>
@@ -218,7 +218,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["mingi de fotbal"]["pentru iarba"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'pentru iarba' ? generateRoute(['mingi de fotbal','pentru iarba']) : generateRoute(['mingi de fotbal','pentru iarba',item])}>
                   {item}
                 </LinkItem>
               );
@@ -227,7 +227,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["mingi de fotbal"]["sala"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'sala' ? generateRoute(['mingi de fotbal','sala']) : generateRoute(['mingi de fotbal','sala',item])}>
                   {item}
                 </LinkItem>
               );
@@ -236,7 +236,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["mingi de fotbal"]["marca"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'marca' ? generateRoute(['mingi de fotbal','marca']) : generateRoute(['mingi de fotbal','marca',item])}>
                   {item}
                 </LinkItem>
               );
@@ -245,7 +245,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer>
-        <MainLink onClick={() => expandMenu(4)} to="/soj">
+        <MainLink onClick={() => expandMenu(4)} to={generateRoute(['accesorii'])}>
           Accesorii
           {expand[4] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
         </MainLink>
@@ -253,7 +253,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["accesorii"]["genti si rucsacuri"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'genti si rucsacuri' ? generateRoute(['accesorii','genti si rucsacuri']) : generateRoute(['accesorii','genti si rucsacuri',item])}>
                   {item}
                 </LinkItem>
               );
@@ -262,7 +262,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["accesorii"]["antrenament"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'antrenament' ? generateRoute(['accesorii','antrenament']) : generateRoute(['accesorii','antrenament',item])}>
                   {item}
                 </LinkItem>
               );
@@ -271,7 +271,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["accesorii"]["aparatori fotbal"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'aparatori fotbal' ? generateRoute(['accesorii','aparatori fotbal']) : generateRoute(['accesorii','aparatori fotbal',item])}>
                   {item}
                 </LinkItem>
               );
@@ -280,7 +280,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer>
-        <MainLink onClick={() => expandMenu(5)} to="/soj">
+        <MainLink onClick={() => expandMenu(5)} to={generateRoute(['portari'])}>
           Portari
           {expand[5] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
         </MainLink>
@@ -288,7 +288,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["portari"]["manusi"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'manusi' ? generateRoute(['portari','manusi']) : generateRoute(['portari','manusi',item])}>
                   {item}
                 </LinkItem>
               );
@@ -297,7 +297,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["portari"]["imbracaminte"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'imbracaminte' ? generateRoute(['portari','imbracaminte']) : generateRoute(['portari','imbracaminte',item])}>
                   {item}
                 </LinkItem>
               );
@@ -306,7 +306,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
           <Links>
             {MenuLinks["portari"]["marca"].map((item: any) => {
               return (
-                <LinkItem key={item} to="/soj">
+                <LinkItem key={item} to={item === 'marca' ? generateRoute(['portari','marca']) : generateRoute(['portari','marca',item])}>
                   {item}
                 </LinkItem>
               );

@@ -1,4 +1,4 @@
-export function generateRoute(name: string) {
-  const param = name.replaceAll(" ", "-");
-  return `/${param}`;
+export function generateRoute(arr: string[]) {
+  let param = arr.map(route => `/${route.replaceAll(' ','-')}`);
+  return param.join('');
 }
