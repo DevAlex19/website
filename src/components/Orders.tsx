@@ -1,13 +1,23 @@
 import React from "react";
 import { OrdersContainer } from "../styles/DashboardStyles";
-import { EmptyOrdersContainer, OrdersList, OrdersTitle,Order, OrderDetailsContainer, OrderNumber, OrderInfo, OrderDetails } from "../styles/Orders";
+import {
+  EmptyOrdersContainer,
+  OrdersList,
+  OrdersTitle,
+  Order,
+  OrderDetailsContainer,
+  OrderNumber,
+  OrderInfo,
+  OrderDetails,
+} from "../styles/Orders";
 
+function Orders() {
+  return (
+    <OrdersContainer>
+      <OrdersTitle>Comenzile mele</OrdersTitle>
+      <EmptyOrdersContainer>Nu ai nici o comanda.</EmptyOrdersContainer>
 
-function Orders(){
-    return <OrdersContainer>
-       <OrdersTitle>Comenzile mele</OrdersTitle>
-       <EmptyOrdersContainer>Nu ai nici o comanda.</EmptyOrdersContainer>
-       {/* <OrdersList>
+      {/* <OrdersList>
         <Order>
             <OrderDetailsContainer>
                 <OrderNumber>Comanda nr.34835783</OrderNumber>
@@ -59,6 +69,7 @@ function Orders(){
         </Order>
        </OrdersList> */}
     </OrdersContainer>
+  );
 }
 
 export default Orders;

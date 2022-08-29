@@ -17,6 +17,8 @@ import { useEffect } from "react";
 import { getUser } from "./app/data/actions";
 import ErrorPage from "./components/404Page";
 import ForgotPassword from "./components/ForgotPassword";
+import DisplayProducts from "./styles/DisplayProducts";
+import CheckRoute from "./app/helperFunctions/checkRoute";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -51,6 +53,15 @@ function App() {
             <Route path="settings" element={<UserInfo />} />
             <Route path="password" element={<ChangePassword />} />
           </Route>
+
+          <Route
+            path="/:product"
+            element={
+              <CheckRoute>
+                <DisplayProducts />
+              </CheckRoute>
+            }
+          ></Route>
           <Route path="/about" element={<About />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
