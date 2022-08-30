@@ -9,7 +9,8 @@
 
 body,
 input,
-button {
+button,
+select {
   font-family: "Josefin Sans", arial;
   font-weight: 400;
 }
