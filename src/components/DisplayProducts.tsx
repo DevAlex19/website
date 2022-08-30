@@ -21,10 +21,9 @@ function DisplayProducts() {
         <Categories />
         <ProductsSection>
           <FilterProducts />
-          <ProductsList />
+          <Products />
         </ProductsSection>
       </ProductsContainer>
-      <Products />
       <Footer />
     </>
   );
