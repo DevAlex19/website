@@ -102,3 +102,82 @@ export const Input = styled.input`
 export const InputLine = styled.div`
     font-size:1.5rem;
 `
+
+
+export const RangeSliderContainer = styled.div`
+    background:#999999;
+    width:90%;
+    height:5px;
+    border-radius:10px;
+    margin:0 auto;
+    margin-top:1.8rem;
+    position:relative;
+    margin-bottom:3rem;
+`;
+
+
+export const Tooltip = styled.div<{ left: string }>`
+    position:absolute;
+    background:black;
+    width:30px;
+    height:30px;
+    top:-45px;
+    left:${({ left }) => left};
+    transform:translateX(-50%);
+    color:white;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    border-radius:5px;
+    &:before{
+        position:absolute;
+        content:'';
+        border-top:5px solid black;
+        border-left:5px solid transparent;
+        border-right:5px solid transparent;
+        top:100%;
+    }
+`;
+export const TooltipContainer = styled.div`
+    &:hover ${Tooltip}{
+        display:flex;
+    }
+`;
+export const Handle = styled.input`
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:none;
+    border-radius:10px;
+    pointer-events:none;
+    &::-webkit-slider-thumb {
+        margin-top: -4px;
+        pointer-events:auto;
+        cursor:pointer;
+        -webkit-appearance:none;
+        background:#e32636;
+        width:15px;
+        height:15px;
+        border-radius:50%;
+      }
+    
+    &::-webkit-slider-runnable-track {
+        border-radius:10px;
+        width:100%;
+        height:100%;
+        border:0;
+      }
+`;
+export const HandleContainer = styled.div<{ width: string, left: string }>`
+    position:absolute;
+    width:${({ width }) => width};
+    background:black;
+    height:100%;
+    left:${({ left }) => left};
+    border-radius:10px;
+`
+
+
