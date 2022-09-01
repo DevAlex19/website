@@ -18,7 +18,7 @@ import { getUser } from "./app/data/actions";
 import ErrorPage from "./components/404Page";
 import ForgotPassword from "./components/ForgotPassword";
 import DisplayProducts from "./components/DisplayProducts";
-
+import Checkout from "./components/Checkout";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -54,29 +54,17 @@ function App() {
             <Route path="password" element={<ChangePassword />} />
           </Route>
 
-          <Route
-            path="/:product"
-            element={
-             
-                <DisplayProducts />
-           
-            }
-          >
+          <Route path="/:product" element={<DisplayProducts />}>
             <Route
-          path="/:product/:category"
-          element={
-           
-              <DisplayProducts />
-         
-          }
-        ></Route><Route
-          path="/:product/:category/:subcategory"
-          element={
-           
-              <DisplayProducts />
-         
-          }
-        ></Route></Route>
+              path="/:product/:category"
+              element={<DisplayProducts />}
+            ></Route>
+            <Route
+              path="/:product/:category/:subcategory"
+              element={<DisplayProducts />}
+            ></Route>
+          </Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/about" element={<About />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

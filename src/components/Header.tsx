@@ -50,12 +50,18 @@ import { initialStateType, logOut } from "../app/reducer/loginSlice";
 import { useAppDispatch } from "../app/store/store";
 import { auth } from "../firebaseConfig";
 import { signOut } from "firebase/auth";
+import { generateRoute } from "../app/helperFunctions/generateRoute";
+import Cart from "./Cart";
+import { useForm } from "react-hook-form";
+import SearchDropdown from "./SearchDropdown";
 
 function Header() {
-  let [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(false);
+  const [searchDropdown, setSearchDropdown] = useState(true);
   const { registerEmail } = useSelector(
     (state: initialStateType) => state.userLogin.user
   );
+  const { register } = useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -74,8 +80,9 @@ function Header() {
         </LogoContainer>
         <BtnsContainer>
           <InputContainer>
-            <Input placeholder="Caută..." />
+            <Input {...register("search")} placeholder="Caută..." />
             <InputIcon icon={faMagnifyingGlass} />
+            <SearchDropdown />
           </InputContainer>
           <ContactContainer>
             <Icon icon={faPhoneFlip} />
@@ -155,16 +162,7 @@ function Header() {
           <CartContainer>
             <Icon icon={faCartShopping} />
             <CartDropdown>
-              <EmptyCart>
-                <p>Cosul este gol.</p>
-                <div>
-                  <img
-                    alt="ghete"
-                    src="https://i1.t4s.cz/products/ah7383-400/nike-vapor-12-academy-ic-181831-ah7383-400s1.png"
-                  />
-                  <p>Vezi ultimele modele de ghete de fotbal.</p>
-                </div>
-              </EmptyCart>
+              <Cart />
             </CartDropdown>
           </CartContainer>
         </BtnsContainer>

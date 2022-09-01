@@ -1,18 +1,33 @@
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
-  ProductImage,
-  ProductsItem,
-  ProductTitle,
-  ProductPrice,
-} from "../styles/ProductsListStyles";
-import { ProductsListContainer } from "../styles/ProductsStyles";
-import {
-  RatingContainer,
-  RatingStars,
-  Stars,
-  StarsContainer,
-  RatingNumber,
-} from "../styles/SliderGalleryStyles";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+  CartItemsContainer,
+  CartItemsTitle,
+  CartPageContainer,
+  TotalPriceContainer,
+  CartItemContainer,
+  CartItemSection,
+  CartItemImage,
+  CartItemDetails,
+  CartItemTitle,
+  CartItemSize,
+  CartItemPriceContainer,
+  CartItemInputContainer,
+  CartItemButton,
+  CartItemInput,
+  CartItemPriceSection,
+  CartItemPrice,
+  CartDeleteItem,
+  CartDeleteIcon,
+  TotalPrice,
+  MainButton,
+  TotalPriceSection,
+  BackButton,
+} from "../styles/CartPageStyles";
+import { CartDivider } from "../styles/CartStyles";
+import { CheckoutHeader } from "./CheckoutHeader";
 
 const data = [
   {
@@ -52,47 +67,62 @@ const data = [
     price: 32444,
   },
 ];
-function Products() {
+
+function CartPage({ page, setPage }: CheckoutHeader) {
+  const navigate = useNavigate();
+
   return (
-    <ProductsListContainer>
-      {data.map(({ image, title, price }, index) => {
-        return (
-          <ProductsItem key={index}>
-            <ProductImage src={image} alt={image} />
-            <div style={{ padding: "0 0.5rem 1rem" }}>
-              <ProductTitle>{title}</ProductTitle>
-              <ProductPrice>{price}</ProductPrice>
-              <RatingContainer>
-                <RatingStars>
-                  {Array.from(Array(5).keys()).map((item, index) => {
-                    return (
-                      <Stars
-                        style={{ color: "rgb(220,220,220)" }}
-                        key={index}
-                        icon={faStar}
-                      ></Stars>
-                    );
-                  })}
-                  <StarsContainer>
-                    {Array.from(Array(5).keys()).map((item, index) => {
-                      return (
-                        <Stars
-                          style={{ color: "rgb(255, 191, 0)" }}
-                          key={index}
-                          icon={faStar}
-                        ></Stars>
-                      );
-                    })}
-                  </StarsContainer>
-                </RatingStars>
-                <RatingNumber>(2.4)</RatingNumber>
-              </RatingContainer>
-            </div>
-          </ProductsItem>
-        );
-      })}
-    </ProductsListContainer>
+    <CartPageContainer>
+      <CartItemsContainer>
+        <CartItemsTitle>Continutul cosului</CartItemsTitle>
+        <CartDivider />
+        {data.map((item, index) => {
+          return (
+            <CartItemContainer key={index}>
+              <CartItemSection>
+                <CartItemImage src={item.image} />
+                <CartItemDetails>
+                  <CartItemTitle>{item.title}</CartItemTitle>
+                  <CartItemSize>Marime: 23</CartItemSize>
+                </CartItemDetails>
+              </CartItemSection>
+              <CartItemPriceContainer>
+                <CartItemInputContainer>
+                  <CartItemButton>-</CartItemButton>
+                  <CartItemInput type="text" />
+                  <CartItemButton>+</CartItemButton>
+                </CartItemInputContainer>
+                <CartItemPriceSection>
+                  <CartItemPrice>{item.price} lei</CartItemPrice>
+                  <CartDeleteItem>
+                    <CartDeleteIcon icon={faTrashCan} />
+                  </CartDeleteItem>
+                </CartItemPriceSection>
+              </CartItemPriceContainer>
+            </CartItemContainer>
+          );
+        })}
+      </CartItemsContainer>
+      <TotalPriceContainer>
+        <TotalPriceSection>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <p>Total:</p>
+            <TotalPrice>23242 lei</TotalPrice>
+          </div>
+          <MainButton
+            onClick={() =>
+              setPage({ ...page, value: 1, pages: ["cos", "date contact"] })
+            }
+          >
+            Continua
+          </MainButton>
+        </TotalPriceSection>
+        <BackButton onClick={() => navigate("/")}>
+          <FontAwesomeIcon icon={faChevronLeft} /> Inapoi la magazin
+        </BackButton>
+      </TotalPriceContainer>
+    </CartPageContainer>
   );
 }
 
-export default Products;
+export default CartPage;

@@ -1,18 +1,25 @@
+import { EmptyCart } from "../styles/HeaderStyles";
+import { useNavigate } from "react-router-dom";
+import { generateRoute } from "../app/helperFunctions/generateRoute";
 import {
-  ProductImage,
-  ProductsItem,
-  ProductTitle,
-  ProductPrice,
-} from "../styles/ProductsListStyles";
-import { ProductsListContainer } from "../styles/ProductsStyles";
-import {
-  RatingContainer,
-  RatingStars,
-  Stars,
-  StarsContainer,
-  RatingNumber,
-} from "../styles/SliderGalleryStyles";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+  CartButton,
+  CartContainer,
+  CartDivider,
+  CartItemButton,
+  CartItemContainer,
+  CartItemDetails,
+  CartItemImage,
+  CartItemName,
+  CartItemPrice,
+  CartItemPriceContainer,
+  CartItemsContainer,
+  CartItemSection,
+  CartItemSize,
+  TotalPrice,
+  TotalPriceName,
+  TotalPriceResult,
+} from "../styles/CartStyles";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const data = [
   {
@@ -52,47 +59,56 @@ const data = [
     price: 32444,
   },
 ];
-function Products() {
+
+function Cart() {
+  const navigate = useNavigate();
+
+  function deleteProduct(product: string) {}
+
   return (
-    <ProductsListContainer>
-      {data.map(({ image, title, price }, index) => {
-        return (
-          <ProductsItem key={index}>
-            <ProductImage src={image} alt={image} />
-            <div style={{ padding: "0 0.5rem 1rem" }}>
-              <ProductTitle>{title}</ProductTitle>
-              <ProductPrice>{price}</ProductPrice>
-              <RatingContainer>
-                <RatingStars>
-                  {Array.from(Array(5).keys()).map((item, index) => {
-                    return (
-                      <Stars
-                        style={{ color: "rgb(220,220,220)" }}
-                        key={index}
-                        icon={faStar}
-                      ></Stars>
-                    );
-                  })}
-                  <StarsContainer>
-                    {Array.from(Array(5).keys()).map((item, index) => {
-                      return (
-                        <Stars
-                          style={{ color: "rgb(255, 191, 0)" }}
-                          key={index}
-                          icon={faStar}
-                        ></Stars>
-                      );
-                    })}
-                  </StarsContainer>
-                </RatingStars>
-                <RatingNumber>(2.4)</RatingNumber>
-              </RatingContainer>
-            </div>
-          </ProductsItem>
-        );
-      })}
-    </ProductsListContainer>
+    // <EmptyCart>
+    //   <p>Cosul este gol.</p>
+    //   <div onClick={() => navigate(generateRoute(["ghete de fotbal"]))}>
+    //     <img
+    //       alt="ghete"
+    //       src="https://i1.t4s.cz/products/ah7383-400/nike-vapor-12-academy-ic-181831-ah7383-400s1.png"
+    //     />
+    //     <p>Vezi ultimele modele de ghete de fotbal.</p>
+    //   </div>
+    // </EmptyCart>
+    <CartContainer>
+      <CartItemsContainer>
+        {data.slice(0, 4).map((item, index) => {
+          return (
+            <CartItemContainer key={index}>
+              <CartItemSection>
+                <CartItemImage src={item.image} alt={item.image} />
+                <CartItemDetails>
+                  <CartItemName>{item.title}</CartItemName>
+                  <CartItemSize>Marime: 44</CartItemSize>
+                </CartItemDetails>
+              </CartItemSection>
+              <CartItemPriceContainer>
+                <CartItemPrice>{item.price} lei</CartItemPrice>
+                <CartItemButton
+                  onClick={() => deleteProduct(item.title)}
+                  icon={faClose}
+                />
+              </CartItemPriceContainer>
+            </CartItemContainer>
+          );
+        })}
+      </CartItemsContainer>
+      <CartDivider />
+      <TotalPrice>
+        <TotalPriceName>Total:</TotalPriceName>
+        <TotalPriceResult>124 lei</TotalPriceResult>
+      </TotalPrice>
+      <CartButton onClick={() => navigate("/checkout")}>
+        Vezi detalii cos
+      </CartButton>
+    </CartContainer>
   );
 }
 
-export default Products;
+export default Cart;

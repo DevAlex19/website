@@ -1,18 +1,28 @@
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+import { CartPageContainer } from "../styles/CartPageStyles";
+import { CartDivider } from "../styles/CartStyles";
 import {
-  ProductImage,
-  ProductsItem,
-  ProductTitle,
-  ProductPrice,
-} from "../styles/ProductsListStyles";
-import { ProductsListContainer } from "../styles/ProductsStyles";
-import {
-  RatingContainer,
-  RatingStars,
-  Stars,
-  StarsContainer,
-  RatingNumber,
-} from "../styles/SliderGalleryStyles";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+  CheckoutDetailsButton,
+  CheckoutDetailsContainer,
+  CheckoutDetailsInfo,
+  CheckoutDetailsRow,
+  CheckoutDetailsSection,
+  CheckoutDetailsTitle,
+  CheckoutItemDetails,
+  CheckoutItemImage,
+  CheckoutItemName,
+  CheckoutItemPrice,
+  CheckoutItems,
+  CheckoutItemsContainer,
+  CheckoutItemSection,
+  CheckoutItemSize,
+  CheckoutItemsSection,
+  CheckoutItemsTitle,
+  CheckoutItemsTotalContainer,
+} from "../styles/CheckoutFinalStyles";
+import { CheckoutHeader } from "./CheckoutHeader";
 
 const data = [
   {
@@ -52,47 +62,63 @@ const data = [
     price: 32444,
   },
 ];
-function Products() {
+
+function CheckoutFinal({ page, setPage }: CheckoutHeader) {
+  const navigate = useNavigate();
+
   return (
-    <ProductsListContainer>
-      {data.map(({ image, title, price }, index) => {
-        return (
-          <ProductsItem key={index}>
-            <ProductImage src={image} alt={image} />
-            <div style={{ padding: "0 0.5rem 1rem" }}>
-              <ProductTitle>{title}</ProductTitle>
-              <ProductPrice>{price}</ProductPrice>
-              <RatingContainer>
-                <RatingStars>
-                  {Array.from(Array(5).keys()).map((item, index) => {
-                    return (
-                      <Stars
-                        style={{ color: "rgb(220,220,220)" }}
-                        key={index}
-                        icon={faStar}
-                      ></Stars>
-                    );
-                  })}
-                  <StarsContainer>
-                    {Array.from(Array(5).keys()).map((item, index) => {
-                      return (
-                        <Stars
-                          style={{ color: "rgb(255, 191, 0)" }}
-                          key={index}
-                          icon={faStar}
-                        ></Stars>
-                      );
-                    })}
-                  </StarsContainer>
-                </RatingStars>
-                <RatingNumber>(2.4)</RatingNumber>
-              </RatingContainer>
-            </div>
-          </ProductsItem>
-        );
-      })}
-    </ProductsListContainer>
+    <CartPageContainer>
+      <CheckoutItems>
+        <CheckoutItemsTitle>Continutul cosului</CheckoutItemsTitle>
+        <CartDivider />
+        {data.map((item, index) => {
+          return (
+            <CheckoutItemsContainer key={index}>
+              <CheckoutItemsSection>
+                <CheckoutItemSection>
+                  <CheckoutItemImage src={item.image} alt={item.image} />
+                  <CheckoutItemDetails>
+                    <CheckoutItemName>{item.title}</CheckoutItemName>
+                    <CheckoutItemSize>Marime: 23</CheckoutItemSize>
+                  </CheckoutItemDetails>
+                </CheckoutItemSection>
+                <CheckoutItemPrice>{item.price} lei</CheckoutItemPrice>
+              </CheckoutItemsSection>
+            </CheckoutItemsContainer>
+          );
+        })}
+        <CartDivider />
+        <CheckoutItemsTotalContainer>
+          <p>Total:</p>
+          <p>2424 lei</p>
+        </CheckoutItemsTotalContainer>
+      </CheckoutItems>
+      <CheckoutDetailsContainer>
+        <CheckoutDetailsSection>
+          <CheckoutDetailsTitle>Date contact</CheckoutDetailsTitle>
+          <CartDivider />
+          <CheckoutDetailsInfo>
+            <CheckoutDetailsRow>Nume: Gelu Ion</CheckoutDetailsRow>
+            <CheckoutDetailsRow>Email: gelu@sidj.com</CheckoutDetailsRow>
+            <CheckoutDetailsRow>Telefon: 234442122</CheckoutDetailsRow>
+            <CheckoutDetailsRow>Adresa: str juh, nr 232</CheckoutDetailsRow>
+            <CheckoutDetailsRow>Judet: Cluj</CheckoutDetailsRow>
+            <CheckoutDetailsRow>Oras: Floresti</CheckoutDetailsRow>
+            <CheckoutDetailsRow>Cod postal: 245352</CheckoutDetailsRow>
+          </CheckoutDetailsInfo>
+        </CheckoutDetailsSection>
+
+        <CheckoutDetailsButton
+          onClick={() => {
+            navigate("/");
+            setPage({ page, value: 0, pages: ["cos"] });
+          }}
+        >
+          <FontAwesomeIcon icon={faChevronLeft} /> Inapoi la magazin
+        </CheckoutDetailsButton>
+      </CheckoutDetailsContainer>
+    </CartPageContainer>
   );
 }
 
-export default Products;
+export default CheckoutFinal;

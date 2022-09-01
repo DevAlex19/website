@@ -17,7 +17,6 @@ import { Form, Inputs } from "./LoginForm";
 import { loginUser } from "../app/data/actions";
 import { useAppDispatch } from "../app/store/store";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
 
 function SignInForm({ setFocus, focus, openLogin, setLogin }: Form) {
   const {
