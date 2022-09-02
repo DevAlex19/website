@@ -7,6 +7,7 @@ import {
   Links,
   LinkItem,
   Expand,
+  MainLinkText,
 } from "../styles/MenuStyles";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import { MenuLinks } from "../app/data/menuLinks";
@@ -33,6 +34,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
 
   useEffect(() => {
     setNavbar(false);
+    setMenu(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -42,6 +44,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
         setMenu(false);
       }
     }
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -55,13 +58,20 @@ function Menu({ menu, setMenu }: MenuTypes) {
   return (
     <MenuLinksContainer menu={menu}>
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
-        <MainLink
-          onClick={() => expandMenu(0)}
-          to={menu ? generateRoute(["/"]) : generateRoute(["ghete de fotbal"])}
-        >
-          Ghete de fotbal
-          {expand[0] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
-        </MainLink>
+        {menu ? (
+          <MainLinkText onClick={() => expandMenu(0)}>
+            Ghete de fotbal{" "}
+            {expand[0] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
+          </MainLinkText>
+        ) : (
+          <MainLink
+            to={
+              menu ? generateRoute(["/"]) : generateRoute(["ghete de fotbal"])
+            }
+          >
+            Ghete de fotbal
+          </MainLink>
+        )}
 
         <Dropdown open={width <= 860 ? expand[0] : false}>
           <Links>
@@ -141,13 +151,18 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
-        <MainLink
-          onClick={() => expandMenu(1)}
-          to={menu ? generateRoute(["/"]) : generateRoute(["pentru fani"])}
-        >
-          Pentru fani
-          {expand[1] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
-        </MainLink>
+        {menu ? (
+          <MainLinkText onClick={() => expandMenu(1)}>
+            Pentru fani
+            {expand[1] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
+          </MainLinkText>
+        ) : (
+          <MainLink
+            to={menu ? generateRoute(["/"]) : generateRoute(["pentru fani"])}
+          >
+            Pentru fani
+          </MainLink>
+        )}
         <Dropdown open={width <= 860 ? expand[1] : false}>
           <Links>
             {MenuLinks["pentru fani"]["cluburi"].map((item: any) => {
@@ -216,13 +231,18 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
-        <MainLink
-          onClick={() => expandMenu(2)}
-          to={menu ? generateRoute(["/"]) : generateRoute(["imbracaminte"])}
-        >
-          Imbracaminte
-          {expand[2] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
-        </MainLink>
+        {menu ? (
+          <MainLinkText onClick={() => expandMenu(2)}>
+            Imbracaminte
+            {expand[2] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
+          </MainLinkText>
+        ) : (
+          <MainLink
+            to={menu ? generateRoute(["/"]) : generateRoute(["imbracaminte"])}
+          >
+            Imbracaminte
+          </MainLink>
+        )}
         <Dropdown open={width <= 860 ? expand[2] : false}>
           <Links>
             {MenuLinks.imbracaminte["tricouri de fotbal"].map((item: any) => {
@@ -367,13 +387,20 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
-        <MainLink
-          onClick={() => expandMenu(3)}
-          to={menu ? generateRoute(["/"]) : generateRoute(["mingi de fotbal"])}
-        >
-          Mingi de fotbal
-          {expand[3] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
-        </MainLink>
+        {menu ? (
+          <MainLinkText onClick={() => expandMenu(3)}>
+            Mingi de fotbal
+            {expand[3] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
+          </MainLinkText>
+        ) : (
+          <MainLink
+            to={
+              menu ? generateRoute(["/"]) : generateRoute(["mingi de fotbal"])
+            }
+          >
+            Mingi de fotbal
+          </MainLink>
+        )}
         <Dropdown open={width <= 860 ? expand[3] : false}>
           <Links>
             {MenuLinks["mingi de fotbal"]["pentru iarba"].map((item: any) => {
@@ -426,13 +453,18 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
-        <MainLink
-          onClick={() => expandMenu(4)}
-          to={menu ? generateRoute(["/"]) : generateRoute(["accesorii"])}
-        >
-          Accesorii
-          {expand[4] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
-        </MainLink>
+        {menu ? (
+          <MainLinkText onClick={() => expandMenu(4)}>
+            Accesorii
+            {expand[4] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
+          </MainLinkText>
+        ) : (
+          <MainLink
+            to={menu ? generateRoute(["/"]) : generateRoute(["accesorii"])}
+          >
+            Accesorii
+          </MainLink>
+        )}
         <Dropdown open={width <= 860 ? expand[4] : false}>
           <Links>
             {MenuLinks["accesorii"]["genti si rucsacuri"].map((item: any) => {
@@ -485,13 +517,18 @@ function Menu({ menu, setMenu }: MenuTypes) {
         </Dropdown>
       </LinkContainer>
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
-        <MainLink
-          onClick={() => expandMenu(5)}
-          to={menu ? generateRoute(["/"]) : generateRoute(["portari"])}
-        >
-          Portari
-          {expand[5] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
-        </MainLink>
+        {menu ? (
+          <MainLinkText onClick={() => expandMenu(5)}>
+            Portari
+            {expand[5] ? <Expand icon={faMinus} /> : <Expand icon={faPlus} />}
+          </MainLinkText>
+        ) : (
+          <MainLink
+            to={menu ? generateRoute(["/"]) : generateRoute(["portari"])}
+          >
+            Portari
+          </MainLink>
+        )}
         <Dropdown open={width <= 860 ? expand[5] : false}>
           <Links>
             {MenuLinks["portari"]["manusi"].map((item: any) => {

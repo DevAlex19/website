@@ -126,7 +126,7 @@ export const MobileMenu = styled.div`
 export const CloseBtn = styled(Icon)<{ open?: boolean }>`
   position: fixed;
   display: none;
-  cursor: poiner;
+  cursor: pointer;
   right: 10px;
   z-index: 2;
   top: 4%;

@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const CheckoutDetailsContainer = styled.div`
   width: 30%;
+  @media (max-width: 1200px) {
+    width: 100%;
+    margin-top: 2rem;
+  }
 `;
 export const CheckoutItems = styled.div`
   width: 70%;
@@ -9,12 +13,19 @@ export const CheckoutItems = styled.div`
   border-radius: 5px;
   padding: 1.5rem;
   background: white;
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
 `;
 export const CheckoutItemsSection = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+  @media (max-width: 540px) {
+    flex-direction: column;
+    align-items: start;
+  }
 `;
 export const CheckoutItemsContainer = styled.div``;
 export const CheckoutDetailsTitle = styled.div`
@@ -41,6 +52,9 @@ export const CheckoutItemSection = styled.div`
   display: flex;
   align-items: center;
   column-gap: 20px;
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 `;
 export const CheckoutItemDetails = styled.div`
   display: flex;
@@ -54,7 +68,11 @@ export const CheckoutItemName = styled.p`
 export const CheckoutItemSize = styled.p`
   font-size: 1rem;
 `;
-export const CheckoutItemPrice = styled.p``;
+export const CheckoutItemPrice = styled.p`
+  @media (max-width: 540px) {
+    transform: translate(160px, -40px);
+  }
+`;
 export const CheckoutDetailsRow = styled.p`
   :not(:last-child) {
     margin-bottom: 0.5rem;

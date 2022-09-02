@@ -10,7 +10,8 @@
 body,
 input,
 button,
-select {
+select,
+textarea {
   font-family: "Josefin Sans", arial;
   font-weight: 400;
 }

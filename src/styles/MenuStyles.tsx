@@ -34,7 +34,6 @@ export const Dropdown = styled.div<{ open: boolean | string }>`
   padding-top: 0;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  top: 100%;
   width: 100%;
   left: 0;
   position: absolute;
@@ -62,6 +61,19 @@ export const MainLink = styled(Link)`
   display: flex;
   align-items: center;
   text-transform: uppercase;
+  &:hover {
+    color: #e32636;
+  }
+`;
+export const MainLinkText = styled.p`
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: black;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  cursor: pointer;
   &:hover {
     color: #e32636;
   }

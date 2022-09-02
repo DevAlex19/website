@@ -19,6 +19,8 @@ import ErrorPage from "./components/404Page";
 import ForgotPassword from "./components/ForgotPassword";
 import DisplayProducts from "./components/DisplayProducts";
 import Checkout from "./components/Checkout";
+import SearchPage from "./components/SearchPage";
+import ProductPage from "./components/ProductPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -64,7 +66,9 @@ function App() {
               element={<DisplayProducts />}
             ></Route>
           </Route>
+          <Route path="/p/:productPage" element={<ProductPage />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/search/:searchValue" element={<SearchPage />}></Route>
           <Route path="/about" element={<About />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>

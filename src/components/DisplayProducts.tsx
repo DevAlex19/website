@@ -16,7 +16,8 @@ export type FiltersMenuType = {
 
 function DisplayProducts() {
   const { pathname } = useLocation();
-  const [filtersMenu, setFiltersMenu] = useState(true);
+  const [filtersMenu, setFiltersMenu] = useState(false);
+  const searchParam = pathname.split("/").filter((i) => i);
 
   useEffect(() => {
     function closeFilterMenu() {
@@ -32,7 +33,7 @@ function DisplayProducts() {
   return (
     <>
       <Header />
-      <BreadCrumb path={pathname} />
+      {searchParam.includes("search") ? null : <BreadCrumb path={pathname} />}
       <ProductsContainer>
         <ProductsHeader
           filtersMenu={filtersMenu}

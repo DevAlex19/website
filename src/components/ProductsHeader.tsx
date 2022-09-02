@@ -9,7 +9,7 @@ import {
   SortProductsItems,
   SortProductsSelected,
 } from "../styles/CategoriesStyles";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import {
   faArrowDownWideShort,
@@ -20,9 +20,11 @@ import { FiltersMenuType } from "./DisplayProducts";
 
 function ProductsHeader({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
   const { pathname } = useLocation();
+  const param = useParams();
   const title = pathname
     .split("/")
     [pathname.split("/").length - 1].replaceAll("-", " ");
+  const searchParam = pathname.split("/").filter((i) => i);
   const [selected, setSelected] = useState("Cele mai populare");
   const [dropdown, setDropdown] = useState(false);
   const ref = useRef<any>(null);
@@ -39,7 +41,13 @@ function ProductsHeader({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
 
   return (
     <ProductsHeaderContainer>
-      <ProductsHeaderTitle>{title}</ProductsHeaderTitle>
+      <ProductsHeaderTitle>
+        {searchParam.includes("search")
+          ? `REZULTATELE CAUTARII: ${
+              param.searchValue ? param.searchValue : ""
+            }`
+          : title}
+      </ProductsHeaderTitle>
       <BtnsContainer>
         <SortProductsContainer ref={ref}>
           <SortProductsSelected

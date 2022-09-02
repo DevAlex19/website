@@ -11,7 +11,7 @@ export const CartPageContainer = styled.div`
   display: flex;
   column-gap: 20px;
   @media (max-width: 1200px) {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 `;
 export const CartItemsContainer = styled.div`
@@ -20,12 +20,12 @@ export const CartItemsContainer = styled.div`
   border-radius: 5px;
   padding: 1.5rem;
   background: white;
-  @media (max-width: 1200px) {
-    margin-top: 2rem;
-  }
 `;
 export const TotalPriceContainer = styled.div`
   flex: 30%;
+  @media (max-width: 1200px) {
+    margin-top: 2rem;
+  }
 `;
 export const CartItemsTitle = styled.p`
   font-size: 1.2rem;

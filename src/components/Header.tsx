@@ -57,11 +57,11 @@ import SearchDropdown from "./SearchDropdown";
 
 function Header() {
   const [menu, setMenu] = useState(false);
-  const [searchDropdown, setSearchDropdown] = useState(true);
+  const [searchDropdown, setSearchDropdown] = useState(false);
   const { registerEmail } = useSelector(
     (state: initialStateType) => state.userLogin.user
   );
-  const { register } = useForm();
+  const { register, watch } = useForm();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -80,9 +80,25 @@ function Header() {
         </LogoContainer>
         <BtnsContainer>
           <InputContainer>
-            <Input {...register("search")} placeholder="Caută..." />
-            <InputIcon icon={faMagnifyingGlass} />
-            <SearchDropdown />
+            <Input
+              {...register("search")}
+              placeholder="Caută..."
+              onChange={(e: any) => {
+                if (e.target.value.length >= 3 && !searchDropdown) {
+                  setSearchDropdown(true);
+                }
+              }}
+            />
+            <InputIcon
+              icon={faMagnifyingGlass}
+              onClick={() => {
+                navigate(`/search/${watch().search}`);
+              }}
+            />
+            <SearchDropdown
+              modal={searchDropdown}
+              setModal={setSearchDropdown}
+            />
           </InputContainer>
           <ContactContainer>
             <Icon icon={faPhoneFlip} />

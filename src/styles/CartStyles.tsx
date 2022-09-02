@@ -3,6 +3,9 @@ import styled from "styled-components";
 
 export const CartContainer = styled.div`
   min-width: 400px;
+  @media (max-width: 475px) {
+    min-width: 300px;
+  }
 `;
 export const CartItemsContainer = styled.div`
   max-height: 440px;
