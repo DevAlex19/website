@@ -8,8 +8,9 @@ import {
   LinkItem,
   Expand,
   MainLinkText,
+  CloseMenu,
 } from "../styles/MenuStyles";
-import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMinus, faClose } from "@fortawesome/free-solid-svg-icons";
 import { MenuLinks } from "../app/data/menuLinks";
 import { generateRoute } from "../app/helperFunctions/generateRoute";
 import { useLocation } from "react-router-dom";
@@ -57,6 +58,7 @@ function Menu({ menu, setMenu }: MenuTypes) {
 
   return (
     <MenuLinksContainer menu={menu}>
+      <CloseMenu open={menu} onClick={() => setMenu(false)} icon={faClose} />
       <LinkContainer open={navbar} onMouseOver={() => setNavbar(true)}>
         {menu ? (
           <MainLinkText onClick={() => expandMenu(0)}>

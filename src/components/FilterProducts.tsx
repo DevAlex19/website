@@ -41,14 +41,6 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
   const [inputs, setInputs] = useState({ min: 0, max: 100 });
   const max = 100;
 
-  //@ts-ignore
-  useEffect(() => {
-    if (filtersMenu) {
-      document.body.style.overflow = "hidden";
-    }
-    return () => (document.body.style.overflow = "auto");
-  }, [filtersMenu]);
-
   function handleSlider(e: any, handle: string) {
     if (handle === "left" && e.target.value >= max / 2) {
       return;

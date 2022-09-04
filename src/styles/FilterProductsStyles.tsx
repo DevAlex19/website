@@ -5,13 +5,20 @@ export const FilterProductsContainer = styled.div<{ show: boolean }>`
   width: 25%;
   @media (max-width: 860px) {
     display: ${({ show }) => (show === true ? "block" : "none")};
-    position: absolute;
+    position: fixed;
     top: 0;
+    bottom: 0;
     background: white;
+    overflow-y: scroll;
     left: 0;
     width: 100%;
     height: 100%;
     padding-top: 4rem;
+    z-index: 1;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    padding-bottom: 2rem;
   }
 `;
 export const FilterBtn = styled.button`

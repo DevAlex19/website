@@ -28,7 +28,7 @@ export const SettingsContainer = styled.div<{ open?: boolean }>`
       left: 0;
       width: 100%;
       overflow: hidden;
-      height: ${({ open }) => (open === true ? "380px" : "0px")};
+      height: ${({ open }) => (open === true ? "100%" : "0px")};
       background: rgb(234, 234, 234);
       box-shadow: 0 2px 5px black;
     }

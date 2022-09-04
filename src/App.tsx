@@ -8,7 +8,6 @@ import Orders from "./components/Orders";
 import UserInfo from "./components/UserInfo";
 import ChangePassword from "./components/ChangePassword";
 import About from "./components/About";
-import Admin from "./components/Admin";
 import PrivateRoute from "./app/helperFunctions/PrivateRoute";
 import { useAppDispatch } from "./app/store/store";
 import { useSelector } from "react-redux";
@@ -51,7 +50,6 @@ function App() {
             }
           >
             <Route path="orders" element={<Orders />} />
-            <Route path="admin" element={<Admin />} />
             <Route path="settings" element={<UserInfo />} />
             <Route path="password" element={<ChangePassword />} />
           </Route>

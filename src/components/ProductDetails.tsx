@@ -18,7 +18,7 @@ import Rating from "./Rating";
 
 function ProductDetails() {
   const [sizes, setSizes] = useState<any>({ size: [], error: false });
-
+  const [addCartModal, setAddCartModal] = useState(false);
   return (
     <>
       <ProductSection>
@@ -56,12 +56,19 @@ function ProductDetails() {
           onMouseOver={() => {}}
         >
           <ProductButtonSection error={sizes.error}>
-            <ProductButton>Adauga in cos</ProductButton>
+            <ProductButton
+              onClick={() => !sizes.error && setAddCartModal(true)}
+            >
+              Adauga in cos
+            </ProductButton>
             <ProductButton>Selecteaza marimea</ProductButton>
           </ProductButtonSection>
         </ProductButtonContainer>
       </ProductSection>
-      <ProductModal />
+      <ProductModal
+        addCartModal={addCartModal}
+        setAddCartModal={setAddCartModal}
+      />
     </>
   );
 }

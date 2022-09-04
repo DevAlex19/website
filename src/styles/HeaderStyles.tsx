@@ -314,15 +314,6 @@ export const HamburgerMenu = styled.div`
   .line2 {
     transition: opacity 0.5s;
   }
-  .line1.active {
-    transform: translate(0, 11px) rotate(45deg);
-  }
-  .line2.active {
-    opacity: 0;
-  }
-  .line3.active {
-    transform: translate(0, -12px) rotate(-45deg);
-  }
 
   @media (max-width: 860px) {
     display: block;

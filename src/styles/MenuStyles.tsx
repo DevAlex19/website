@@ -9,13 +9,22 @@ export const MenuLinksContainer = styled.div<{ menu: boolean }>`
   position: relative;
   z-index: 1;
   @media (max-width: 860px) {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
     flex-direction: column;
+    justify-content: start;
+    overflow-y: scroll;
     z-index: 1;
     background: white;
     display: ${({ menu }) => (menu === true ? "flex" : "none")};
     width: 100%;
     animation: open 0.5s;
+    padding-top: 2rem;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     @keyframes open {
       from {
         left: -100%;
@@ -26,6 +35,18 @@ export const MenuLinksContainer = styled.div<{ menu: boolean }>`
     }
   }
 `;
+export const CloseMenu = styled(FontAwesomeIcon)<{ open: boolean }>`
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  cursor: pointer;
+  font-size: 2.5rem;
+  display: none;
+  @media (max-width: 860px) {
+    display: ${({ open }) => (open === true ? "block" : "none")};
+  }
+`;
+
 export const Dropdown = styled.div<{ open: boolean | string }>`
   display: ${({ open }) => (open === true ? "flex" : "none")};
   padding: 2rem;

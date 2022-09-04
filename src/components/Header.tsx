@@ -73,9 +73,9 @@ function Header() {
             <span>4</span>sport
           </Link>
           <HamburgerMenu onClick={() => setMenu(!menu)}>
-            <div className={menu ? "line1 active" : "line1"}></div>
-            <div className={menu ? "line2 active" : "line2"}></div>
-            <div className={menu ? "line3 active" : "line3"}></div>
+            <div className={"line1"}></div>
+            <div className={"line2"}></div>
+            <div className={"line3"}></div>
           </HamburgerMenu>
         </LogoContainer>
         <BtnsContainer>
