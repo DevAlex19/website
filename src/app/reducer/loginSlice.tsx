@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser, getUser, updateUser, addUser } from "../data/actions";
+import {
+  loginUser,
+  getUser,
+  updateUser,
+  addUser,
+  getProducts,
+  getProduct,
+} from "../data/actions";
 
 export type userType = {
   firstName?: string;
@@ -16,9 +23,15 @@ export type userLoginType = {
   user: userType;
   loading: boolean;
 };
+export type productsType = {
+  list: any;
+  loading: boolean;
+  product: any;
+};
 
 export interface initialStateType {
   userLogin: userLoginType;
+  products: productsType;
 }
 
 const initialState: initialStateType = {
@@ -35,7 +48,11 @@ const initialState: initialStateType = {
       id: "",
     },
   },
- 
+  products: {
+    loading: false,
+    list: [],
+    product: [],
+  },
 };
 
 export const loginSlice = createSlice({
@@ -57,7 +74,6 @@ export const loginSlice = createSlice({
 
       localStorage.removeItem("Auth Token");
     },
-   
   },
   extraReducers: (builder) => {
     builder.addCase(addUser.pending, (state, action) => {
@@ -83,6 +99,20 @@ export const loginSlice = createSlice({
     });
     builder.addCase(updateUser.fulfilled, (state, action) => {
       state.userLogin = { ...state.userLogin, ...action.payload };
+    });
+    builder.addCase(getProducts.pending, (state, action) => {
+      state.products.loading = true;
+    });
+    builder.addCase(getProducts.fulfilled, (state, action) => {
+      state.products.list = [...action.payload];
+      state.products.loading = false;
+    });
+    builder.addCase(getProduct.pending, (state, action) => {
+      state.products.loading = true;
+    });
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      state.products.loading = false;
+      state.products.product = [...action.payload];
     });
   },
 });

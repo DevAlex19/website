@@ -20,6 +20,8 @@ export const ProductsItem = styled.div`
 `;
 export const ProductImage = styled.img`
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 export const ProductTitle = styled.p`
   text-transform: uppercase;

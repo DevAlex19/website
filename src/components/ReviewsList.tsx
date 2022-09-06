@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+import { initialStateType } from "../app/reducer/loginSlice";
 import {
   ReviewDivider,
   ReviewItemUser,
@@ -10,30 +12,31 @@ import {
 import Rating from "./Rating";
 
 function ReviewsList() {
+  const product = useSelector(
+    (state: initialStateType) => state.products.product
+  );
   return (
     <Reviews>
-      <ReviewTitle>Review-uri</ReviewTitle>
-      <ReviewsItem>
-        <ReviewItemUser>
-          <ReviewName>Gelu</ReviewName>
-          <Rating />
-        </ReviewItemUser>
-        <ReviewText>
-          fewgwegdddddgwggrgrfewgwegdddddgwggrgrfewgwegdddddgwggrgrfewgwegdddddgwggrgrfewgwegdddddgwggrgr
-          fewgwegdddddgwggrgrfewgwegdddddgwggrgr
-        </ReviewText>
-      </ReviewsItem>
-      <ReviewDivider />
-      <ReviewsItem>
-        <ReviewItemUser>
-          <ReviewName>Gelu</ReviewName>
-          <Rating />
-        </ReviewItemUser>
-        <ReviewText>
-          fewgwegdddddgwggrgrfewgwegdddddgwggrgrfewgwegdddddgwggrgrfewgwegdddddgwggrgrfewgwegdddddgwggrgr
-          fewgwegdddddgwggrgrfewgwegdddddgwggrgr
-        </ReviewText>
-      </ReviewsItem>
+      {product[0] && product[0].length > 0 ? (
+        <ReviewTitle>Review-uri</ReviewTitle>
+      ) : null}
+
+      {product[0] && product[0].length > 0
+        ? product[0].review.map((item: any, index: number) => {
+            return (
+              <div key={index}>
+                <ReviewsItem>
+                  <ReviewItemUser>
+                    <ReviewName>{item.name}</ReviewName>
+                    <Rating />
+                  </ReviewItemUser>
+                  <ReviewText>{item.text}</ReviewText>
+                </ReviewsItem>
+                <ReviewDivider />
+              </div>
+            );
+          })
+        : null}
     </Reviews>
   );
 }

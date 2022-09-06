@@ -4,6 +4,8 @@ import {
   faClose,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { initialStateType } from "../app/reducer/loginSlice";
 import {
   InputContainer,
   Checkbox,
@@ -36,35 +38,72 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
     pret: false,
     culoare: false,
   });
-  const [filters, setFilters] = useState<any>({ min: 20, max: 40 });
+  const [filters, setFilters] = useState<any>({ min: 0, max: 0 });
   const [slider, setSlider] = useState<any>({ left: 0, right: 100 });
   const [inputs, setInputs] = useState({ min: 0, max: 100 });
-  const max = 100;
+  const categories = useSelector(
+    (state: initialStateType) => state.products.list
+  );
+  const sizes: any = new Set(
+    categories
+      .map((item: any) => {
+        let arr = item.marimi.map((size: any) => size.marime);
+        return arr;
+      })
+      .flat()
+  );
+
+  const producer: any = new Set(
+    categories.map((item: any) => item.producator).filter((i: string) => i)
+  );
+  const colors: any = new Set(
+    categories.map((item: any) => item.culoare).filter((i: string) => i)
+  );
+  const minPrice = Math.min(
+    ...categories.map((item: any) => +item.pret).filter((i: any) => i)
+  );
+  const maxPrice = Math.max(
+    ...categories.map((item: any) => +item.pret).filter((i: any) => i)
+  );
+
+  useEffect(() => {
+    setFilters({ ...filters, min: minPrice, max: maxPrice });
+    setInputs({ ...inputs, min: minPrice, max: maxPrice });
+    setSlider({ ...slider, left: minPrice, right: maxPrice });
+  }, [minPrice, maxPrice]);
 
   function handleSlider(e: any, handle: string) {
-    if (handle === "left" && e.target.value >= max / 2) {
+    if (
+      handle === "left" &&
+      Math.floor(((e.target.value - minPrice) / (maxPrice - minPrice)) * 100) >=
+        50
+    ) {
       return;
     }
-    if (handle === "right" && e.target.value <= max / 2) {
+    if (
+      handle === "right" &&
+      Math.floor(((e.target.value - minPrice) / (maxPrice - minPrice)) * 100) <=
+        50
+    ) {
       return;
     }
     setSlider({ ...slider, [handle]: +e.target.value });
   }
 
   function handleOnBlur(e: any) {
-    if (e.target.name === "leftInput" && e.target.value >= max / 2) {
-      setInputs({ ...inputs, min: max / 2 });
+    if (e.target.name === "leftInput" && e.target.value >= maxPrice / 2) {
+      setInputs({ ...inputs, min: maxPrice / 2 });
       setSlider({
         ...slider,
-        [e.target.name === "leftInput" ? "left" : "right"]: max / 2,
+        [e.target.name === "leftInput" ? "left" : "right"]: maxPrice / 2,
       });
       return;
     }
-    if (e.target.name === "rightInput" && e.target.value <= max / 2) {
-      setInputs({ ...inputs, max: max / 2 });
+    if (e.target.name === "rightInput" && e.target.value <= maxPrice / 2) {
+      setInputs({ ...inputs, max: maxPrice / 2 });
       setSlider({
         ...slider,
-        [e.target.name === "leftInput" ? "left" : "right"]: max / 2,
+        [e.target.name === "leftInput" ? "left" : "right"]: maxPrice / 2,
       });
       return;
     }
@@ -90,17 +129,17 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
           />
         </FilterTitleContainer>
         <FilterItems className={dropdown.dimensiune ? "expand" : ""}>
-          <FilterItem
-            active={filters["22"]}
-            onClick={() => setFilters({ ...filters, ["22"]: "22" })}
-          >
-            22
-          </FilterItem>
-          <FilterItem>22</FilterItem>
-          <FilterItem>22</FilterItem>
-          <FilterItem>22</FilterItem>
-          <FilterItem>22</FilterItem>
-          <FilterItem>22</FilterItem>
+          {[...sizes]
+            .filter((i) => i)
+            .map((item) => (
+              <FilterItem
+                key={item}
+                active={filters["22"]}
+                onClick={() => setFilters({ ...filters, ["22"]: "22" })}
+              >
+                {item}
+              </FilterItem>
+            ))}
         </FilterItems>
       </FilterContainer>
       <FilterContainer>
@@ -119,31 +158,41 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
           type={"column"}
           className={dropdown.producator ? "expand" : ""}
         >
-          <ProducerItemContainer>
-            <CheckBoxContainer
-              onClick={() =>
-                setFilters({ ...filters, ["under armour"]: "under armour" })
-              }
-            >
-              <Checkbox
-                style={{ display: filters["under armour"] ? "flex" : "none" }}
-                icon={faCheck}
-              />
-            </CheckBoxContainer>
-            <ProducerItem
-              onClick={() => {
-                if (filters["under armour"]) {
-                  const newFilters = { ...filters };
-                  delete newFilters["under armour"];
-                  setFilters(newFilters);
-                  return;
-                }
-                setFilters({ ...filters, ["under armour"]: "under armour" });
-              }}
-            >
-              Under Armour
-            </ProducerItem>
-          </ProducerItemContainer>
+          {[...producer].map((item: any) => {
+            return (
+              <ProducerItemContainer key={item}>
+                <CheckBoxContainer
+                  onClick={() =>
+                    setFilters({ ...filters, ["under armour"]: "under armour" })
+                  }
+                >
+                  <Checkbox
+                    style={{
+                      display: filters["under armour"] ? "flex" : "none",
+                    }}
+                    icon={faCheck}
+                  />
+                </CheckBoxContainer>
+
+                <ProducerItem
+                  onClick={() => {
+                    if (filters["under armour"]) {
+                      const newFilters = { ...filters };
+                      delete newFilters["under armour"];
+                      setFilters(newFilters);
+                      return;
+                    }
+                    setFilters({
+                      ...filters,
+                      ["under armour"]: "under armour",
+                    });
+                  }}
+                >
+                  {item}
+                </ProducerItem>
+              </ProducerItemContainer>
+            );
+          })}
         </FilterItems>
       </FilterContainer>
       <FilterContainer>
@@ -162,24 +211,16 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
           type={"column"}
           className={dropdown.culoare ? "expand" : ""}
         >
-          <ProducerItemContainer>
-            <CheckBoxContainer>
-              <Checkbox icon={faCheck} />
-            </CheckBoxContainer>
-            <ProducerItem>Albastru</ProducerItem>
-          </ProducerItemContainer>
-          <ProducerItemContainer>
-            <CheckBoxContainer>
-              <Checkbox icon={faCheck} />
-            </CheckBoxContainer>
-            <ProducerItem>Albastru</ProducerItem>
-          </ProducerItemContainer>
-          <ProducerItemContainer>
-            <CheckBoxContainer>
-              <Checkbox icon={faCheck} />
-            </CheckBoxContainer>
-            <ProducerItem>Albastru</ProducerItem>
-          </ProducerItemContainer>
+          {[...colors].map((item: any) => {
+            return (
+              <ProducerItemContainer key={item}>
+                <CheckBoxContainer>
+                  <Checkbox icon={faCheck} />
+                </CheckBoxContainer>
+                <ProducerItem>{item}</ProducerItem>
+              </ProducerItemContainer>
+            );
+          })}
         </FilterItems>
       </FilterContainer>
       <FilterContainer>
@@ -217,14 +258,12 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
           <RangeSliderContainer>
             <HandleContainer
               width={
-                slider.left < slider.right
-                  ? Math.abs(slider.left - slider.right) + "%"
-                  : slider.left - slider.right + "%"
+                Math.abs(
+                  ((slider.left - slider.right) / (maxPrice - minPrice)) * 100
+                ) + "%"
               }
               left={
-                slider.left < slider.right
-                  ? slider.left + "%"
-                  : slider.right + "%"
+                ((slider.left - minPrice) / (maxPrice - minPrice)) * 100 + "%"
               }
             />
             {["left", "right"].map((item) => {
@@ -241,10 +280,17 @@ function FilterProducts({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
                       });
                     }}
                     onChange={(e) => handleSlider(e, item)}
-                    min="0"
-                    max="100"
+                    min={minPrice}
+                    max={maxPrice}
                   />
-                  <Tooltip left={Math.abs(slider[item]) + "%"}>
+                  <Tooltip
+                    left={
+                      Math.abs(
+                        ((slider[item] - minPrice) / (maxPrice - minPrice)) *
+                          100
+                      ) + "%"
+                    }
+                  >
                     {slider[item]}
                   </Tooltip>
                 </TooltipContainer>

@@ -13,6 +13,10 @@ import {
   RatingNumber,
 } from "../styles/SliderGalleryStyles";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
+import { initialStateType } from "../app/reducer/loginSlice";
+import { useNavigate } from "react-router-dom";
+import { reduceEachLeadingCommentRange } from "typescript";
 
 const data = [
   {
@@ -53,15 +57,25 @@ const data = [
   },
 ];
 function Products() {
+  const products = useSelector(
+    (state: initialStateType) => state.products.list
+  );
+  const navigate = useNavigate();
+
   return (
     <ProductsListContainer>
-      {data.map(({ image, title, price }, index) => {
+      {products.map(({ imagine, nume, pret }: any, index: number) => {
         return (
-          <ProductsItem key={index}>
-            <ProductImage src={image} alt={image} />
+          <ProductsItem
+            key={index}
+            onClick={() => navigate(`/p/${nume.replaceAll(" ", "-")}`)}
+          >
+            <div style={{ height: "250px" }}>
+              <ProductImage src={imagine} alt={imagine} />
+            </div>
             <div style={{ padding: "0 0.5rem 1rem" }}>
-              <ProductTitle>{title}</ProductTitle>
-              <ProductPrice>{price}</ProductPrice>
+              <ProductTitle>{nume}</ProductTitle>
+              <ProductPrice>{pret} lei</ProductPrice>
               <RatingContainer>
                 <RatingStars>
                   {Array.from(Array(5).keys()).map((item, index) => {

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { initialStateType } from "../app/reducer/loginSlice";
 import {
   ReviewBtn,
   ReviewContainer,
@@ -13,15 +15,25 @@ import ReviewModal from "./ReviewModal";
 
 function Reviews() {
   const [reviewModal, setReviewModal] = useState(false);
+  const product = useSelector(
+    (state: initialStateType) => state.products.product
+  );
+  let rating = 0;
+  if (product[0]) {
+    rating =
+      product[0].review.reduce((res: number, acc: any) => {
+        return res + acc.rating;
+      }, 0) / product.length;
+  }
 
   return (
     <ReviewContainer>
       <ReviewTitle>Review</ReviewTitle>
       <ReviewSection>
         <ReviewRatingContainer>
-          <ReviewRating>5</ReviewRating>
+          <ReviewRating>{Math.floor(rating)}</ReviewRating>
           <Rating />
-          <ReviewNumber>3 review-uri</ReviewNumber>
+          <ReviewNumber>{product.length - 1} review-uri</ReviewNumber>
         </ReviewRatingContainer>
         <ReviewBtn
           onClick={(e: any) => {

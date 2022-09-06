@@ -68,7 +68,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />}></Route>
           <Route path="/search/:searchValue" element={<SearchPage />}></Route>
           <Route path="/about" element={<About />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="/error" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </>

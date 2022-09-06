@@ -1,6 +1,8 @@
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { initialStateType } from "../app/reducer/loginSlice";
 import {
   ProductName,
   ProductSection,
@@ -19,48 +21,65 @@ import Rating from "./Rating";
 function ProductDetails() {
   const [sizes, setSizes] = useState<any>({ size: [], error: false });
   const [addCartModal, setAddCartModal] = useState(false);
+  const product = useSelector(
+    (state: initialStateType) => state.products.product
+  );
+
   return (
     <>
       <ProductSection>
-        <ProductName>PUMA FUTURE Z 1.4 MXSG</ProductName>
-        <ProductPrice>784 lei</ProductPrice>
+        <ProductName>{product[0] && product[0].nume}</ProductName>
+        <ProductPrice>{product[0] && product[0].pret} lei</ProductPrice>
         <Rating />
+
         <ProductSizeContainer>
           <ProductSizeTitle>Dimensiune:</ProductSizeTitle>
           <ProductSizeItem>
-            <ProductSize
-              onClick={() => {
-                if (sizes.error) {
-                  setSizes({ ...sizes, size: ["22"], error: false });
-                  return;
-                }
-                setSizes({ ...sizes, size: ["22"] });
-              }}
-            >
-              22
-            </ProductSize>
-            <ProductSize color={sizes.error ? "red" : "#a0a8b2"}>
-              22
-            </ProductSize>
-            <ProductSize>22</ProductSize>
-            <ProductSize>22</ProductSize>
-            <ProductSize>22</ProductSize>
+            {product[0] &&
+              product[0].marimi.map((item: any, index: number) => {
+                return (
+                  <ProductSize
+                    color={sizes.size.includes(item.marime) ? "true" : "false"}
+                    key={index}
+                    onClick={() => {
+                      if (sizes.error) {
+                        setSizes({
+                          ...sizes,
+                          size: !sizes.size.includes(item.marime)
+                            ? [...sizes.size, item.marime]
+                            : sizes.size,
+                          error: false,
+                        });
+                        return;
+                      }
+
+                      setSizes({
+                        ...sizes,
+                        size: !sizes.size.includes(item.marime)
+                          ? [...sizes.size, item.marime]
+                          : sizes.size,
+                      });
+                    }}
+                  >
+                    {item.marime}
+                  </ProductSize>
+                );
+              })}
           </ProductSizeItem>
         </ProductSizeContainer>
+
         <ProductButtonContainer
           onClick={() => {
             if (sizes.size.length <= 0) {
               setSizes({ ...sizes, error: true });
+            } else {
+              setSizes({ ...sizes, error: false });
+              setAddCartModal(true);
             }
           }}
-          onMouseOver={() => {}}
         >
           <ProductButtonSection error={sizes.error}>
-            <ProductButton
-              onClick={() => !sizes.error && setAddCartModal(true)}
-            >
-              Adauga in cos
-            </ProductButton>
+            <ProductButton>Adauga in cos</ProductButton>
             <ProductButton>Selecteaza marimea</ProductButton>
           </ProductButtonSection>
         </ProductButtonContainer>
