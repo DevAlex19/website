@@ -6,6 +6,7 @@ import {
   addUser,
   getProducts,
   getProduct,
+  getOrders,
 } from "../data/actions";
 
 export type userType = {
@@ -32,6 +33,9 @@ export type productsType = {
 export interface initialStateType {
   userLogin: userLoginType;
   products: productsType;
+  cart: any;
+  orders: any;
+  userOrders: any;
 }
 
 const initialState: initialStateType = {
@@ -53,6 +57,9 @@ const initialState: initialStateType = {
     list: [],
     product: [],
   },
+  cart: [],
+  orders: [],
+  userOrders: [],
 };
 
 export const loginSlice = createSlice({
@@ -73,6 +80,53 @@ export const loginSlice = createSlice({
       };
 
       localStorage.removeItem("Auth Token");
+    },
+    addToCart(state, action) {
+      const index = state.cart.findIndex(
+        (item: any) =>
+          item.nume === action.payload.nume && item.size === action.payload.size
+      );
+
+      if (index < 0) {
+        state.cart = [
+          ...state.cart,
+          {
+            ...action.payload,
+            total: action.payload.pret * action.payload.quantity,
+          },
+        ];
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+      } else {
+        const newState = [...state.cart];
+        newState[index].quantity = action.payload.quantity;
+        newState[index].total = newState[index].pret * action.payload.quantity;
+        state.cart = newState;
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+      }
+    },
+    deleteItem(state, action) {
+      const newState = [...state.cart];
+      const index = state.cart.findIndex(
+        (item: any) =>
+          item.nume === action.payload.nume && item.size === action.payload.size
+      );
+      state.cart = [
+        ...newState.slice(0, index),
+        ...newState.slice(index + 1, newState.length),
+      ];
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    getCart(state, action) {
+      state.cart = action.payload;
+    },
+    addOrder(state, action) {
+      state.orders = action.payload;
+    },
+    clearCart(state, action) {
+      if (action.payload) {
+        state.cart = [];
+      }
+      localStorage.removeItem("cart");
     },
   },
   extraReducers: (builder) => {
@@ -114,9 +168,13 @@ export const loginSlice = createSlice({
       state.products.loading = false;
       state.products.product = [...action.payload];
     });
+    builder.addCase(getOrders.fulfilled, (state, action) => {
+      state.userOrders = [...action.payload];
+    });
   },
 });
 
-export const { logOut } = loginSlice.actions;
+export const { logOut, addToCart, deleteItem, getCart, addOrder, clearCart } =
+  loginSlice.actions;
 
 export default loginSlice.reducer;

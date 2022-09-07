@@ -42,6 +42,25 @@ export const CheckoutDetailsButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+export const SendOrder = styled.div`
+  width: 170px;
+  display: block;
+  margin: auto;
+  margin-top: 1.8rem;
+  font-size: 1.1rem;
+  background: black;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 0.7rem;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  &:hover {
+    color: black;
+    background: white;
+  }
+`;
 export const CheckoutItemsTitle = styled.div`
   font-size: 1.2rem;
 `;

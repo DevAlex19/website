@@ -22,12 +22,13 @@ import { CartDivider } from "../styles/CartStyles";
 import { useState } from "react";
 import onSubmit from "../app/helperFunctions/checkoutErrors";
 import { CheckoutHeader } from "./CheckoutHeader";
+import { useAppDispatch } from "../app/store/store";
 
 function CheckoutContact({ page, setPage }: CheckoutHeader) {
   const navigate = useNavigate();
   const [errors, setErrors] = useState<any>({});
   const { register, handleSubmit } = useForm();
-
+  const dispatch = useAppDispatch();
   return (
     <CartPageContainer>
       <CheckoutContactContainer>
@@ -81,9 +82,9 @@ function CheckoutContact({ page, setPage }: CheckoutHeader) {
             <TotalPrice>23242 lei</TotalPrice>
           </div>
           <MainButton
-            onClick={handleSubmit((data) =>
-              onSubmit(data, { setErrors, setPage, page })
-            )}
+            onClick={handleSubmit((data) => {
+              onSubmit(data, { setErrors, setPage, page, dispatch });
+            })}
           >
             Continua
           </MainButton>

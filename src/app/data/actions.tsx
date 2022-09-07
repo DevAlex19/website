@@ -17,6 +17,7 @@ import {
 
 const users = collection(db, "users");
 const products = collection(db, "products");
+const orders = collection(db, "orders");
 
 export const addUser = createAsyncThunk("login/addUsers", async (data: any) => {
   const { registerEmail, registerPassword } = data;
@@ -377,6 +378,28 @@ export const getProduct = createAsyncThunk(
   "login/getProduct",
   async (param: any) => {
     const q = query(products, where("nume", "==", param));
+    const productsList = await getDocs(q);
+    const result = productsList.docs.map((product: any) => product.data());
+    return result;
+  }
+);
+
+export const sendOrder = createAsyncThunk(
+  "login/sendOrder",
+  async (data: any) => {
+    const result = await addDoc(orders, {
+      ...data,
+      date: Date.now(),
+      number: Math.floor(Math.random() * 10000),
+    });
+    return;
+  }
+);
+
+export const getOrders = createAsyncThunk(
+  "login/getOrders",
+  async (email: any) => {
+    const q = query(orders, where("email", "==", email));
     const productsList = await getDocs(q);
     const result = productsList.docs.map((product: any) => product.data());
     return result;

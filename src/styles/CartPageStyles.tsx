@@ -99,6 +99,10 @@ export const CartItemInput = styled.input`
   text-align: center;
   font-size: 1.2rem;
   padding-top: 0.3rem;
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 export const CartItemPriceSection = styled.div`
   display: flex;

@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { getOrders } from "../app/data/actions";
+import { initialStateType } from "../app/reducer/loginSlice";
+import { useAppDispatch } from "../app/store/store";
 import { OrdersContainer } from "../styles/DashboardStyles";
 import {
   EmptyOrdersContainer,
@@ -12,62 +16,49 @@ import {
 } from "../styles/Orders";
 
 function Orders() {
+  const dispatch = useAppDispatch();
+  const {
+    userLogin: {
+      user: { registerEmail },
+    },
+    userOrders,
+  } = useSelector((state: initialStateType) => state);
+
+  useEffect(() => {
+    dispatch(getOrders(registerEmail));
+  }, []);
+
   return (
     <OrdersContainer>
-      <OrdersTitle>Comenzile mele</OrdersTitle>
-      <EmptyOrdersContainer>Nu ai nici o comanda.</EmptyOrdersContainer>
-
-      {/* <OrdersList>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-        <Order>
-            <OrderDetailsContainer>
-                <OrderNumber>Comanda nr.34835783</OrderNumber>
-                <OrderInfo>Plasata: 11 mai 2022, 09:28 | Total: 29 lei</OrderInfo>
-            </OrderDetailsContainer>
-            <OrderDetails>detalii comanda</OrderDetails>
-        </Order>
-       </OrdersList> */}
+      {userOrders.length > 0 ? (
+        <OrdersList>
+          {userOrders.map((item: any, index: number) => {
+            const date = new Date(item.date);
+            return (
+              <Order key={index}>
+                <OrderDetailsContainer>
+                  <OrderNumber>Comanda nr. {item.number}</OrderNumber>
+                  <OrderInfo>
+                    Plasata:{" "}
+                    {date.getDate() +
+                      " - " +
+                      (date.getMonth() + 1) +
+                      " - " +
+                      date.getFullYear()}{" "}
+                    | Total: 29 lei
+                  </OrderInfo>
+                </OrderDetailsContainer>
+                <OrderDetails>detalii comanda</OrderDetails>
+              </Order>
+            );
+          })}
+        </OrdersList>
+      ) : (
+        <>
+          <OrdersTitle>Comenzile mele</OrdersTitle>
+          <EmptyOrdersContainer>Nu ai nici o comanda.</EmptyOrdersContainer>
+        </>
+      )}
     </OrdersContainer>
   );
 }

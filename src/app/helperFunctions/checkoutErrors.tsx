@@ -1,6 +1,8 @@
+import { addOrder } from "../reducer/loginSlice";
+
 export default function onSubmit(
   { name, email, phone, address, county, town, code }: any,
-  { setErrors, setPage, page }: any
+  { setErrors, setPage, page, dispatch }: any
 ) {
   let errorsObj: any = {};
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -31,6 +33,7 @@ export default function onSubmit(
     return;
   } else {
     setErrors({});
+    dispatch(addOrder({ name, email, phone, address, county, town, code }));
     setPage({ ...page, value: 2, pages: ["cos", "date contact", "plata"] });
   }
 }

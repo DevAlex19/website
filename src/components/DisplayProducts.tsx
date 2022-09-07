@@ -24,15 +24,13 @@ function DisplayProducts() {
   const [filtersMenu, setFiltersMenu] = useState(false);
   const searchParam = pathname.split("/").filter((i) => i);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const { loading } = useSelector((state: initialStateType) => state.products);
+
+  const { loading, list } = useSelector(
+    (state: initialStateType) => state.products
+  );
 
   useEffect(() => {
-    dispatch(getProducts(searchParam)).then((res: any) => {
-      if (res.payload.length === 0) {
-        navigate("/error");
-      }
-    });
+    dispatch(getProducts(searchParam));
   }, [pathname]);
 
   useEffect(() => {
@@ -50,21 +48,34 @@ function DisplayProducts() {
     <>
       <Header />
       {searchParam.includes("search") ? null : <BreadCrumb path={pathname} />}
-
-      <ProductsContainer>
-        <ProductsHeader
-          filtersMenu={filtersMenu}
-          setFiltersMenu={setFiltersMenu}
-        />
-        <Categories />
-        <ProductsSection>
-          <FilterProducts
+      {list.length > 0 ? (
+        <ProductsContainer>
+          <ProductsHeader
             filtersMenu={filtersMenu}
             setFiltersMenu={setFiltersMenu}
           />
-          {loading ? <Loader /> : <Products />}
-        </ProductsSection>
-      </ProductsContainer>
+          <Categories />
+          <ProductsSection>
+            <FilterProducts
+              filtersMenu={filtersMenu}
+              setFiltersMenu={setFiltersMenu}
+            />
+            {loading ? <Loader /> : <Products />}
+          </ProductsSection>
+        </ProductsContainer>
+      ) : (
+        <div
+          style={{
+            height: "500px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "1.5rem",
+          }}
+        >
+          Produsele nu sunt disponibile
+        </div>
+      )}
 
       <Footer />
     </>

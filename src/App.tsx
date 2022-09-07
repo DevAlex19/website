@@ -11,7 +11,7 @@ import About from "./components/About";
 import PrivateRoute from "./app/helperFunctions/PrivateRoute";
 import { useAppDispatch } from "./app/store/store";
 import { useSelector } from "react-redux";
-import { initialStateType } from "./app/reducer/loginSlice";
+import { getCart, initialStateType } from "./app/reducer/loginSlice";
 import { useEffect } from "react";
 import { getUser } from "./app/data/actions";
 import ErrorPage from "./components/404Page";
@@ -29,8 +29,13 @@ function App() {
 
   useEffect(() => {
     const userToken = localStorage.getItem("Auth Token");
+    const cart = localStorage.getItem("cart");
+
     if (userToken && !registerEmail) {
       dispatch(getUser(userToken));
+    }
+    if (cart) {
+      dispatch(getCart(JSON.parse(cart)));
     }
   }, []);
 
@@ -49,7 +54,7 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route path="orders" element={<Orders />} />
+            <Route path="orders" element={<Orders />}></Route>
             <Route path="settings" element={<UserInfo />} />
             <Route path="password" element={<ChangePassword />} />
           </Route>

@@ -95,7 +95,6 @@ export const ProductButtonContainer = styled.div`
   height: 50px;
   width: 200px;
   cursor: pointer;
-  margin-top: 2.5rem;
   position: relative;
   overflow: hidden;
   border: 1px solid black;
@@ -240,6 +239,8 @@ export const ReviewModalItemContainer = styled.div`
 `;
 export const ReviewModalItemImage = styled.img`
   width: 100px;
+  height: 100px;
+  object-fit: cover;
 `;
 export const ReviewModalSection = styled.div``;
 export const ReviewModalItemName = styled.p`
@@ -381,6 +382,8 @@ export const ModalProduct = styled.div`
 `;
 export const ModalImage = styled.img`
   width: 200px;
+  height: 200px;
+  object-fit: cover;
   @media (max-width: 660px) {
     min-width: 100px;
     object-fit: cover;
@@ -443,4 +446,40 @@ export const AddBtn = styled.button`
     background: white;
     color: black;
   }
+`;
+export const QuantityContainer = styled.div`
+  display: flex;
+  width: 150px;
+  border: 1px solid black;
+  margin-left: 2rem;
+`;
+export const QuantityInput = styled.input`
+  width: 50%;
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+  padding: 1rem 0;
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+export const QuantityBtn = styled.button`
+  width: 25%;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  &:first-child {
+    border-right: 1px solid black;
+  }
+  &:last-child {
+    border-left: 1px solid black;
+  }
+`;
+export const BtnsSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 2.5rem;
 `;
