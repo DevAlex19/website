@@ -93,7 +93,7 @@ export const FilterItems = styled.div<{ type?: string }>`
   }
 `;
 export const FilterItem = styled.div<{ active?: string }>`
-  background: ${({ active }) => (active ? "#999999" : "#e0e0e0")};
+  background: ${({ active }) => (active === "active" ? "#999999" : "#e0e0e0")};
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: 0.3s;

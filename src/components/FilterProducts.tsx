@@ -163,6 +163,7 @@ function FilterProducts({
             .filter((i) => i)
             .map((item) => (
               <FilterItem
+                active={filters.dimensiune.includes(item) ? "active" : ""}
                 key={item}
                 onClick={() => {
                   let sizes: any = [...filters.dimensiune];
@@ -175,6 +176,7 @@ function FilterProducts({
                       ...sizes.slice(index + 1, sizes.length),
                     ];
                   }
+
                   setFilters({ ...filters, dimensiune: [...sizes] });
                 }}
               >
