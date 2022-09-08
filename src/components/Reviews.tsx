@@ -23,7 +23,7 @@ function Reviews() {
     rating =
       product[0].review.reduce((res: number, acc: any) => {
         return res + acc.rating;
-      }, 0) / product.length;
+      }, 0) / product[0].review.length || 0;
   }
 
   return (
@@ -31,9 +31,11 @@ function Reviews() {
       <ReviewTitle>Review</ReviewTitle>
       <ReviewSection>
         <ReviewRatingContainer>
-          <ReviewRating>{Math.floor(rating)}</ReviewRating>
-          <Rating />
-          <ReviewNumber>{product.length - 1} review-uri</ReviewNumber>
+          <ReviewRating>{rating}</ReviewRating>
+          <Rating rating={rating} />
+          <ReviewNumber>
+            {product[0] && product[0].review.length} review-uri
+          </ReviewNumber>
         </ReviewRatingContainer>
         <ReviewBtn
           onClick={(e: any) => {

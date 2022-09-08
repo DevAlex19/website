@@ -18,6 +18,7 @@ import {
 const users = collection(db, "users");
 const products = collection(db, "products");
 const orders = collection(db, "orders");
+const reviews = collection(db, "reviews");
 
 export const addUser = createAsyncThunk("login/addUsers", async (data: any) => {
   const { registerEmail, registerPassword } = data;
@@ -403,5 +404,27 @@ export const getOrders = createAsyncThunk(
     const productsList = await getDocs(q);
     const result = productsList.docs.map((product: any) => product.data());
     return result;
+  }
+);
+
+export const getSliderProducts = createAsyncThunk(
+  "login/getSliderProducts",
+  async () => {
+    const q = query(products, where("tip produs", "==", "mingi de fotbal"));
+    const productsList = await getDocs(q);
+    const result = productsList.docs.map((product: any) => product.data());
+    return result.slice(0, 9);
+  }
+);
+
+export const addReview = createAsyncThunk(
+  "login/addReview",
+  async (data: any) => {
+    const q = query(products, where("nume", "==", data.product));
+    const productsList = await getDocs(q);
+    const productId: any = productsList.docs[0].id;
+    const updateProduct = doc(db, "products", productId);
+    await updateDoc(updateProduct, { review: [...data.review] });
+    return;
   }
 );

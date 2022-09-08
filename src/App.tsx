@@ -13,7 +13,7 @@ import { useAppDispatch } from "./app/store/store";
 import { useSelector } from "react-redux";
 import { getCart, initialStateType } from "./app/reducer/loginSlice";
 import { useEffect } from "react";
-import { getUser } from "./app/data/actions";
+import { getSliderProducts, getUser } from "./app/data/actions";
 import ErrorPage from "./components/404Page";
 import ForgotPassword from "./components/ForgotPassword";
 import DisplayProducts from "./components/DisplayProducts";
@@ -26,6 +26,7 @@ function App() {
   const { registerEmail } = useSelector(
     (state: initialStateType) => state.userLogin.user
   );
+  const slider = useSelector((state: initialStateType) => state.sliderProducts);
 
   useEffect(() => {
     const userToken = localStorage.getItem("Auth Token");
@@ -36,6 +37,9 @@ function App() {
     }
     if (cart) {
       dispatch(getCart(JSON.parse(cart)));
+    }
+    if (slider.length <= 0) {
+      dispatch(getSliderProducts());
     }
   }, []);
 

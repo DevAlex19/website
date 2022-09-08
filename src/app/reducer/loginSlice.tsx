@@ -7,6 +7,8 @@ import {
   getProducts,
   getProduct,
   getOrders,
+  getSliderProducts,
+  addReview,
 } from "../data/actions";
 
 export type userType = {
@@ -35,6 +37,7 @@ export interface initialStateType {
   products: productsType;
   cart: any;
   orders: any;
+  sliderProducts: any;
   userOrders: any;
 }
 
@@ -60,6 +63,7 @@ const initialState: initialStateType = {
   cart: [],
   orders: [],
   userOrders: [],
+  sliderProducts: [],
 };
 
 export const loginSlice = createSlice({
@@ -170,6 +174,9 @@ export const loginSlice = createSlice({
     });
     builder.addCase(getOrders.fulfilled, (state, action) => {
       state.userOrders = [...action.payload];
+    });
+    builder.addCase(getSliderProducts.fulfilled, (state, action) => {
+      state.sliderProducts = [...action.payload];
     });
   },
 });

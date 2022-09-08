@@ -2,7 +2,10 @@ import { faClose, faStar } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { addReview, getProduct } from "../app/data/actions";
 import { initialStateType } from "../app/reducer/loginSlice";
+import { useAppDispatch } from "../app/store/store";
 import {
   CloseModal,
   ReviewInputContainer,
@@ -31,8 +34,16 @@ type ReviewModalType = {
 function ReviewModal({ reviewModal, setReviewModal }: ReviewModalType) {
   const [star, setStar] = useState(0);
   const starRating = useRef(0);
-  const { register, watch } = useForm();
+  const {
+    register,
+    watch,
+    formState: { errors },
+    setError,
+    clearErrors,
+  } = useForm();
   const { product } = useSelector((state: initialStateType) => state.products);
+  const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
 
   //@ts-ignore
   useEffect(() => {
@@ -83,12 +94,65 @@ function ReviewModal({ reviewModal, setReviewModal }: ReviewModalType) {
         <ReviewInputContainer>
           <ReviewModalLabel>Nume:</ReviewModalLabel>
           <ReviewModalInput {...register("name")} />
+
+          {errors.name && (
+            <p style={{ color: "red", marginTop: "0.3rem" }}>
+              {/* @ts-ignore */}
+              {errors.name.message}
+            </p>
+          )}
         </ReviewInputContainer>
         <ReviewInputContainer>
           <ReviewModalLabel>Review:</ReviewModalLabel>
           <ReviewTextarea {...register("comment")} />
+
+          {errors.comment && (
+            <p style={{ color: "red", marginTop: "0.3rem" }}>
+              {/* @ts-ignore */}
+              {errors.comment.message}
+            </p>
+          )}
         </ReviewInputContainer>
-        <ReviewModalBtn>Adauga review</ReviewModalBtn>
+        <ReviewModalBtn
+          onClick={() => {
+            const review = [...product[0].review];
+            if (watch().name.length <= 0) {
+              setError("name", { message: "Name is required." });
+              return;
+            } else {
+              clearErrors("name");
+            }
+            if (watch().comment.length <= 0) {
+              setError("comment", { message: "Comment is required." });
+              return;
+            } else {
+              clearErrors("comment");
+            }
+            review.push({
+              rating: star === 0 ? 1 : star,
+              name: watch().name,
+              text: watch().comment,
+            });
+
+            dispatch(
+              addReview({
+                product: product[0].nume,
+                review: review,
+              })
+            ).then((res) => {
+              dispatch(
+                getProduct(
+                  pathname
+                    .split("/")
+                    [pathname.split("/").length - 1].replaceAll("-", " ")
+                )
+              );
+            });
+            setReviewModal(false);
+          }}
+        >
+          Adauga review
+        </ReviewModalBtn>
       </ReviewModalBox>
     </ReviewsModal>
   );

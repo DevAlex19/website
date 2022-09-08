@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { GridContainer, GridItem } from "../styles/GridStyles";
 
 const images = [
@@ -9,11 +10,30 @@ const images = [
 ];
 
 function Grid() {
+  const navigate = useNavigate();
   return (
     <GridContainer>
       {images.map((image, index) => {
         return (
-          <GridItem key={index}>
+          <GridItem
+            key={index}
+            onClick={() => {
+              switch (index) {
+                case 0:
+                  navigate("/mingi-de-fotbal");
+                  break;
+                case 1:
+                  navigate("/ghete-de-fotbal");
+                  break;
+                case 2:
+                  navigate("/ghete-de-fotbal");
+                  break;
+                case 3:
+                  navigate("/portari");
+                  break;
+              }
+            }}
+          >
             <img src={image} alt={image} />
           </GridItem>
         );

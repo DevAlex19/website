@@ -43,7 +43,7 @@ function Gallery() {
               slide={index + activeSlide}
             >
               <img src={image} alt={image} />
-              <ItemBtn to="">Vezi produse</ItemBtn>
+              <ItemBtn to="/ghete-de-fotbal">Vezi produse</ItemBtn>
             </ItemContainer>
           );
         })}

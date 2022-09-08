@@ -18,7 +18,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FiltersMenuType } from "./DisplayProducts";
 
-function ProductsHeader({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
+function ProductsHeader({
+  filtersMenu,
+  setFiltersMenu,
+  filters,
+  setFilters,
+}: FiltersMenuType) {
   const { pathname } = useLocation();
   const param = useParams();
   const title = pathname
@@ -69,6 +74,8 @@ function ProductsHeader({ filtersMenu, setFiltersMenu }: FiltersMenuType) {
                 onClick={(e: any) => {
                   setSelected(e.target.textContent);
                   setDropdown(false);
+
+                  setFilters({ ...filters, sort: e.target.textContent });
                 }}
                 key={index}
               >

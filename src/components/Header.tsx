@@ -129,20 +129,20 @@ function Header() {
               <LoginDropdown>
                 <UserDropdownContainer>
                   <DropdownIcon icon={faUser} />
-                  <Link to="/dashboard">{registerEmail}</Link>
+                  <Link to="/dashboard/orders">{registerEmail}</Link>
                 </UserDropdownContainer>
                 <Divide />
                 <UserDropdownContainer>
                   <DropdownIcon icon={faBoxOpen} />
-                  <Link to="/dashboard">Comenzile mele</Link>
+                  <Link to="/dashboard/orders">Comenzile mele</Link>
                 </UserDropdownContainer>
                 <UserDropdownContainer>
                   <DropdownIcon icon={faUserGear} />
-                  <Link to="/dashboard">Date utilizator</Link>
+                  <Link to="/dashboard/settings">Date utilizator</Link>
                 </UserDropdownContainer>
                 <UserDropdownContainer>
                   <DropdownIcon icon={faGear} />
-                  <Link to="/dashboard">Schimba parola</Link>
+                  <Link to="/dashboard/password">Schimba parola</Link>
                 </UserDropdownContainer>
                 <Divide />
                 <UserDropdownContainer>

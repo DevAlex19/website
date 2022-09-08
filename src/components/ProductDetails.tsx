@@ -33,13 +33,19 @@ function ProductDetails() {
   const { register, setValue, watch } = useForm();
   const dispatch = useAppDispatch();
   const cart = useSelector((state: initialStateType) => state.cart);
-
+  let rating = 0;
+  if (product[0]) {
+    rating =
+      product[0].review.reduce((res: number, acc: any) => {
+        return res + acc.rating;
+      }, 0) / product[0].review.length || 0;
+  }
   return (
     <>
       <ProductSection>
         <ProductName>{product[0] && product[0].nume}</ProductName>
         <ProductPrice>{product[0] && product[0].pret} lei</ProductPrice>
-        <Rating />
+        <Rating rating={rating} />
         <ProductSizeContainer>
           <ProductSizeTitle>Dimensiune:</ProductSizeTitle>
           <ProductSizeItem>

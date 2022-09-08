@@ -7,7 +7,8 @@ import {
 } from "../styles/SliderGalleryStyles";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-function Rating() {
+function Rating({ rating }: any) {
+  const percetage = ((rating - 0) / (5 - 0)) * 100 + "%";
   return (
     <RatingContainer>
       <RatingStars>
@@ -20,7 +21,7 @@ function Rating() {
             ></Stars>
           );
         })}
-        <StarsContainer>
+        <StarsContainer width={percetage}>
           {Array.from(Array(5).keys()).map((item, index) => {
             return (
               <Stars
@@ -32,7 +33,7 @@ function Rating() {
           })}
         </StarsContainer>
       </RatingStars>
-      <RatingNumber>(2.4)</RatingNumber>
+      <RatingNumber>({rating})</RatingNumber>
     </RatingContainer>
   );
 }
