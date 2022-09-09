@@ -14,6 +14,7 @@ import {
   faGear,
   faRightFromBracket,
 } from "@fortawesome/free-solid-svg-icons";
+import { query, collection, where, getDocs } from "firebase/firestore";
 import {
   HeaderContainer,
   Container,
@@ -48,22 +49,46 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { initialStateType, logOut } from "../app/reducer/loginSlice";
 import { useAppDispatch } from "../app/store/store";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { signOut } from "firebase/auth";
 import { generateRoute } from "../app/helperFunctions/generateRoute";
 import Cart from "./Cart";
 import { useForm } from "react-hook-form";
 import SearchDropdown from "./SearchDropdown";
 
+const debounce = (callback: any, wait: number) => {
+  let timeoutId: any = null;
+  return (...args: any) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback.apply(null, args);
+    }, wait);
+  };
+};
+
 function Header() {
   const [menu, setMenu] = useState(false);
   const [searchDropdown, setSearchDropdown] = useState(false);
+  const [searchResult, setResult] = useState([]);
+  const [input, setInput] = useState("");
+
   const { registerEmail } = useSelector(
     (state: initialStateType) => state.userLogin.user
   );
-  const { register, watch } = useForm();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const searchProducts = debounce(async (name: string) => {
+    const products = collection(db, "products");
+    const productsList = await getDocs(products);
+    const result: any = productsList.docs
+      .map((product: any) => product.data())
+      .filter((product) =>
+        product.nume.toLowerCase().includes(name.toLowerCase())
+      );
+    setResult(result);
+  }, 500);
 
   return (
     <Container>
@@ -81,23 +106,25 @@ function Header() {
         <BtnsContainer>
           <InputContainer>
             <Input
-              {...register("search")}
+              value={input}
               placeholder="Caută..."
               onChange={(e: any) => {
-                if (e.target.value.length >= 3 && !searchDropdown) {
-                  setSearchDropdown(true);
-                }
+                setInput(e.target.value);
+                setSearchDropdown(true);
+                searchProducts(e.target.value);
               }}
             />
             <InputIcon
               icon={faMagnifyingGlass}
               onClick={() => {
-                navigate(`/search/${watch().search}`);
+                navigate(`/search/${input}`);
               }}
             />
             <SearchDropdown
               modal={searchDropdown}
               setModal={setSearchDropdown}
+              searchResult={searchResult}
+              input={input}
             />
           </InputContainer>
           <ContactContainer>

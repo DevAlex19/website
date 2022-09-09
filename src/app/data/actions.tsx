@@ -428,3 +428,24 @@ export const addReview = createAsyncThunk(
     return;
   }
 );
+
+export const getSearchResults = createAsyncThunk(
+  "login/getSearchResults",
+  async (data: any) => {
+    const products = collection(db, "products");
+    const productsList = await getDocs(products);
+
+    if (data === "search") {
+      const result: any = productsList.docs.map((product: any) =>
+        product.data()
+      );
+      return result.slice(0, 20);
+    }
+    const result: any = productsList.docs
+      .map((product: any) => product.data())
+      .filter((product) =>
+        product.nume.toLowerCase().includes(data.toLowerCase())
+      );
+    return result;
+  }
+);

@@ -27,6 +27,8 @@ export const SearchItemContainer = styled.div`
 export const SearchItemSection = styled.div``;
 export const SearchItemImage = styled.img`
   width: 70px;
+  height: 70px;
+  object-fit: cover;
 `;
 export const SearchItemName = styled.p``;
 export const SearchItemPrice = styled.p`

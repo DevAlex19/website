@@ -9,6 +9,7 @@ import {
   getOrders,
   getSliderProducts,
   addReview,
+  getSearchResults,
 } from "../data/actions";
 
 export type userType = {
@@ -177,6 +178,13 @@ export const loginSlice = createSlice({
     });
     builder.addCase(getSliderProducts.fulfilled, (state, action) => {
       state.sliderProducts = [...action.payload];
+    });
+    builder.addCase(getSearchResults.pending, (state, action) => {
+      state.products.loading = true;
+    });
+    builder.addCase(getSearchResults.fulfilled, (state, action) => {
+      state.products.list = [...action.payload];
+      state.products.loading = false;
     });
   },
 });

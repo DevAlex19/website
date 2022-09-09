@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getProducts } from "../app/data/actions";
+import { getProducts, getSearchResults } from "../app/data/actions";
 import { initialStateType } from "../app/reducer/loginSlice";
 import { useAppDispatch } from "../app/store/store";
 import { ProductsContainer, ProductsSection } from "../styles/CategoriesStyles";
@@ -39,7 +39,11 @@ function DisplayProducts() {
   );
 
   useEffect(() => {
-    dispatch(getProducts(searchParam));
+    if (searchParam[0] === "search") {
+      dispatch(getSearchResults(searchParam[searchParam.length - 1]));
+    } else {
+      dispatch(getProducts(searchParam));
+    }
   }, [pathname]);
 
   useEffect(() => {
