@@ -1,10 +1,15 @@
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addToCart, initialStateType } from "../app/reducer/loginSlice";
+import {
+  addToCart,
+  deleteItem,
+  initialStateType,
+} from "../app/reducer/loginSlice";
 import { useAppDispatch } from "../app/store/store";
 import {
   CartItemsContainer,
@@ -41,7 +46,11 @@ function CartPage({ page, setPage }: CheckoutHeader) {
   }, 0);
   const { register, setValue, watch } = useForm();
   const dispatch = useAppDispatch();
-
+  useEffect(() => {
+    if (cart.length <= 0) {
+      navigate("/");
+    }
+  }, [cart]);
   return (
     <CartPageContainer>
       <CartItemsContainer>
@@ -108,7 +117,11 @@ function CartPage({ page, setPage }: CheckoutHeader) {
                 </CartItemInputContainer>
                 <CartItemPriceSection>
                   <CartItemPrice>{item.total} lei</CartItemPrice>
-                  <CartDeleteItem>
+                  <CartDeleteItem
+                    onClick={() => {
+                      dispatch(deleteItem(item));
+                    }}
+                  >
                     <CartDeleteIcon icon={faTrashCan} />
                   </CartDeleteItem>
                 </CartItemPriceSection>
@@ -124,9 +137,9 @@ function CartPage({ page, setPage }: CheckoutHeader) {
             <TotalPrice>{totalPrice} Lei</TotalPrice>
           </div>
           <MainButton
-            onClick={() =>
-              setPage({ ...page, value: 1, pages: ["cos", "date contact"] })
-            }
+            onClick={() => {
+              setPage({ ...page, value: 1, pages: ["cos", "date contact"] });
+            }}
           >
             Continua
           </MainButton>
